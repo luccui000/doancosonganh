@@ -2,4 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'test');
+Route::get('/', [App\Http\Controllers\TrangChuController::class, 'index'])->name('trangchu');

@@ -19,6 +19,7 @@ class SanPham extends Model
         'gia_nhap',
         'gia_niem_yet',
         'gia_khuyen_mai',
+        'trang_thai',
 
         'danhmuc_thongso_id',
         'hinhanh_id',
@@ -49,7 +50,7 @@ class SanPham extends Model
         return money_format('%.0n', $this->gia_khuyen_mai);
     }
     public function getHinhAnhSanPhamAttribute()
-    {
-        return url($this->hinhanh[0]->duong_dan_hinh_anh);
+    {  
+        return url(!isset($this->hinhanh[0]) ? 'storage/undefine.jpeg' : $this->hinhanh[0]->duong_dan_hinh_anh);
     }
 }
