@@ -36,4 +36,20 @@ class SanPham extends Model
     {
         return $this->hasOne(LoaiSanPham::class, 'id', 'loaisanpham_id');
     }
+    public function getGiaNhapVndAttribute()
+    {
+        return money_format('%.0n', $this->gia_nhap);
+    }
+    public function getGiaNiemYetVndAttribute()
+    {
+        return money_format('%.0n', $this->gia_niem_yet);
+    }
+    public function getGiaKhuyenMaiVndAttribute()
+    {
+        return money_format('%.0n', $this->gia_khuyen_mai);
+    }
+    public function getHinhAnhSanPhamAttribute()
+    {
+        return url($this->hinhanh[0]->duong_dan_hinh_anh);
+    }
 }

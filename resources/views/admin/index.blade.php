@@ -15,8 +15,7 @@
     </style>
     <title>Admin Pages</title>
 </head>
-<body class="font-inter antialiased bg-gray-100 text-gray-600"> 
-    
+<body class="font-inter antialiased bg-gray-100 text-gray-600">  
     <div class="flex h-screen overflow-hidden">
         <div class="lg:w-64 bg-gray-800">
             <div class="class="absolute z-40 left-0 top-0 lg:static lg:left-auto lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll lg:overflow-y-auto no-scrollbar w-64 flex-shrink-0 bg-gray-800 p-4 transition-transform duration-200 ease-in-out -translate-x-64">
@@ -155,8 +154,64 @@
                     </div>
                 </div>
             </header>
+            <main class="p-2">
+                <div class="col-span-full xl:col-span-8 bg-white shadow rounded-sm border border-gray-200">
+                    <header class="px-2 py-2 border-b border-gray-100">
+                        <h2 class="font-semibold text-gray-800 pt-2">Danh sách các mặt hàng</h2>
+                    </header>
+                    <div class="p-3">
+                        <div class="overflow-x-auto">
+                            <table class="table-auto w-full"> 
+                                <thead class="text-xs uppercase text-gray-400 bg-gray-50 rounded-sm">
+                                    <tr> 
+                                        <th class="p-2"><div class="font-semibold text-left">#</div> </th>
+                                        <th class="p-2"><div class="font-semibold text-center">Mã sản phẩm</div> </th>
+                                        <th class="p-2"><div class="font-semibold text-center">Hình ảnh</div></th>
+                                        <th class="p-2"><div class="font-semibold text-center">Tên sản phẩm</div></th>
+                                        <th class="p-2"><div class="font-semibold text-center truncate">Đường dẫn liên kết</div></th>
+                                        <th class="p-2"><div class="font-semibold text-center">Hãng sản xuất</div></th>
+                                        <th class="p-2"><div class="font-semibold text-center">Loại sản phẩm</div></th>
+                                        <th class="p-2"><div class="font-semibold text-center">Thông tin khuyến mãi</div></th>
+                                        <th class="p-2"><div class="font-semibold text-center">Bảo hành</div></th>
+                                        <th class="p-2"><div class="font-semibold text-center">Giá nhập</div></th>
+                                        <th class="p-2"><div class="font-semibold text-center">Giá niêm yết</div></th>
+                                        <th class="p-2"><div class="font-semibold text-center">Giá nhập</div></th> 
+                                        <th class="p-2"><div class="font-semibold text-center"></div></th> 
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm font-medium divide-y divide-gray-100">  
+                                    @foreach ($sanphams as $sanpham) 
+                                        <tr>
+                                            <td class="p-2"> <div class="text-gray-800">{{ $loop->iteration }}</div> </td> 
+                                            <td class="p-2"><div class="cursor-pointer text-center">{{ $sanpham->ma_sanpham }}</div></td>
+                                            <td class="p-2">
+                                                <div style="width: 100px;" >
+                                                    <img  class="w-44 h-20" src="{{ $sanpham->hinh_anh_san_pham }}"/>
+                                                </div>
+                                            </td>
+                                            <td class="p-2"><div style="max-width: 300px;" class="text-center text-truncate" title="{{ $sanpham->ten_sanpham }}">{{ $sanpham->ten_sanpham }}</div></td> 
+                                            <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate"  title="{{ $sanpham->duong_dan_lien_ket }}">{{ $sanpham->duong_dan_lien_ket }}</div></td> 
+                                            <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->hang_san_xuat }}">{{ $sanpham->hang_san_xuat }}</div></td> 
+                                            <td class="p-2"><div class="text-center w-32" >{{ $sanpham->loaisanpham->ten_loai_sanpham }}</div></td>  
+                                            <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->thong_tin_khuyen_mai }}">{{ $sanpham->thong_tin_khuyen_mai }}</div></td> 
+                                            <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->bao_hanh }}">{{ $sanpham->bao_hanh }}</div></td> 
+                                            <td class="p-2"><div class="text-center text-green-500">{{ $sanpham->gia_nhap_vnd }}</div></td> 
+                                            <td class="p-2"><div class="text-center text-green-500">{{ $sanpham->gia_niem_yet_vnd }}</div></td> 
+                                            <td class="p-2"><div class="text-center text-blue-500  text-lg">{{ $sanpham->gia_khuyen_mai_vnd }}</div></td> 
+                                            <td class="inline-block cursor-pointer">
+                                                <a>Sửa</a>
+                                                <a>Xem</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
-    </div>
+    </div> 
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
