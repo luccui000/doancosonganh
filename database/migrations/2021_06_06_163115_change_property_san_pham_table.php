@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDanhmucThongsoTable extends Migration
+class ChangePropertySanPhamTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateDanhmucThongsoTable extends Migration
      */
     public function up()
     {
-        Schema::create('DANHMUC_THONGSO', function (Blueprint $table) {
-            $table->id();
-            $table->string('ten_danh_muc_thong_so');
-            $table->timestamps();
+        Schema::table('SANPHAM', function(Blueprint $table){
+            $table->text('chi_tiet_thong_so');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateDanhmucThongsoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('DANHMUC_THONGSO');
+        Schema::table('SANPHAM', function(Blueprint $table){
+            $table->dropColumn('chi_tiet_thong_so');
+        });
     }
 }

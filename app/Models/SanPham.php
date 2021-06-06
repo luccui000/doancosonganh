@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\MyApp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,15 +21,10 @@ class SanPham extends Model
         'gia_niem_yet',
         'gia_khuyen_mai',
         'trang_thai',
+        'chi_tiet_thong_so',
 
-        'danhmuc_thongso_id',
-        'hinhanh_id',
         'loaisanpham_id',
-    ];
-    public function danhmucthongso()
-    {
-        return $this->belongsToMany(DanhMucThongSo::class, 'DMTS_SANPHAM', 'sanpham_id' ,'danhmuc_thongso_id');
-    }
+    ]; 
     public function hinhanh()
     {
         return $this->belongsToMany(HinhAnh::class, 'HINHANH_SANPHAM', 'sanpham_id' ,'hinhanh_id');
@@ -52,5 +48,17 @@ class SanPham extends Model
     public function getHinhAnhSanPhamAttribute()
     {  
         return url(!isset($this->hinhanh[0]) ? 'storage/undefine.jpeg' : $this->hinhanh[0]->duong_dan_hinh_anh);
+    }
+    public function setMaSanphamAttribute($value)
+    { 
+        $MaDanhMuc = MyApp::MA_LOAI_SAN_PHAM;
+        $requestLoaiSanPham = request()->input('loaisanpham_id'); 
+        $prefix = $MaDanhMuc[$requestLoaiSanPham  - 1];
+        $latestId = $this->latest()->first()->id;
+        $this->attributes['ma_sanpham'] = $prefix . str_pad($latestId, 4, '0', STR_PAD_LEFT);
+    }
+    public function setDuongDanLienKetAttribute($value)
+    {
+        $this->attributes['duong_dan_lien_ket'] = tieng_viet_khong_dau(request()->input('ten_sanpham')). '_id' . rand(1000, 9999);
     }
 }

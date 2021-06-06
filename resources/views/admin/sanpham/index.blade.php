@@ -22,8 +22,7 @@
                 <table class="table-auto w-full"> 
                     <thead class="text-xs uppercase text-gray-400 bg-gray-50 rounded-sm">
                         <tr> 
-                            <th class="p-2"><div class="font-semibold text-left">#</div> </th>
-                            <th class="p-2"><div class="font-semibold text-center">Mã sản phẩm</div> </th>
+                            <th class="p-2"><div class="font-semibold text-center">#</div> </th> 
                             <th class="p-2"><div class="font-semibold text-center">Hình ảnh</div></th>
                             <th class="p-2"><div class="font-semibold text-center">Tên sản phẩm</div></th>
                             <th class="p-2"><div class="font-semibold text-center truncate">Đường dẫn liên kết</div></th>
@@ -38,8 +37,7 @@
                     </thead>
                     <tbody class="text-sm font-medium divide-y divide-gray-100">  
                         @foreach ($sanphams as $sanpham) 
-                            <tr x-show="openTab === {{ $sanpham->loaisanpham->id }}" >
-                                <td class="p-2"> <div class="text-gray-800">{{ $loop->iteration }}</div> </td> 
+                            <tr x-show="openTab === {{ $sanpham->loaisanpham->id }}" > 
                                 <td class="p-2"><div class="cursor-pointer text-center">{{ $sanpham->ma_sanpham }}</div></td>
                                 <td class="p-2">
                                     <div style="width: 100px;" >
@@ -62,7 +60,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                             </svg>
                                         </a>
-                                        <a class="w-4 mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
+                                        <a href="{{ route('admin.sanpham.edit', ['id' => $sanpham->id]) }}" class="w-4 mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                             </svg>

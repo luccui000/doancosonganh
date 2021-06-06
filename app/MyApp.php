@@ -11,4 +11,5 @@ class MyApp {
         'THIETBILUUTRU' => 6,
         'DIENTHOAIDIDONG' => 7,
     ];
+    const MA_LOAI_SAN_PHAM = ['MM', 'ML', 'TB', 'LK', 'MH', 'LT', 'DT'];
 }

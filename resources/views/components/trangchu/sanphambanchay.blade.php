@@ -19,7 +19,7 @@
     </div>
     <div class="flex flex-col mb-2">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4"> 
-            @foreach ($sanphams as $sanpham)
+            @foreach ($sanphams->take(12) as $sanpham)
                 <div class="flex flex-col items-left justify-center bg-white p-1 hover:shadow-md rounded-lg cursor-pointer">
                     <div class="inline-flex shadow-lg border border-gray-200 overflow-hidden h-full w-full">
                         <img

@@ -8,8 +8,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">  
-    <style>
-        
+    <style> 
         body {
             font-family: 'Roboto', sans-serif;
         }  
@@ -31,7 +30,7 @@
                             </a>
                         </li>
                         <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 false">
-                            <a aria-current="page" class="block text-gray-200 hover:text-white hover:no-underline transition duration-150 false active" href="/" style="outline: currentcolor none medium;">
+                            <a href="{{ route('admin.sanpham.index') }}" aria-current="page" class="block text-gray-200 hover:text-white hover:no-underline transition duration-150 false active" style="outline: currentcolor none medium;">
                                 <div class="flex flex-grow"> 
                                     <span class="text-sm font-medium">Mặt hàng</span>
                                 </div>
@@ -118,7 +117,7 @@
             </main>
         </div>
     </div> 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.0/dist/sweetalert2.all.min.js"></script>
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>  
     <script>  
         window.addEventListener('swal.modal', event => { 
             Swal.fire({
@@ -128,9 +127,9 @@
             }) 
         }) 
     </script>
-    <script src="https://momentjs.com/downloads/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script> 
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> 
+    <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>

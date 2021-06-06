@@ -13,7 +13,7 @@
        }
        #file-input {
            display: none;
-       }  
+       } 
        .ck-editor__editable_inline {
             min-height: 400px;
         }
@@ -24,31 +24,32 @@
     <div class="col-span-full xl:col-span-8 bg-white shadow rounded-sm border border-gray-200">
         <header class="px-2 py-2 border-b border-gray-100 flex justify-between">
             <div class="">
-                <h2 class="font-semibold text-gray-800 pt-2">Thêm mới mặt hàng</h2>
+                <h2 class="font-semibold text-gray-800 pt-2">Chỉnh sửa mặt hàng</h2>
             </div>  
         </header>
         <div class="p-3"> 
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <form method="POST" action="{{ route('admin.sanpham.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.sanpham.update', $sanpham->id) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT') 
                             <div class="mb-4">
                                 <label class="text-xl text-gray-600">Tên sản phẩm <span class="text-red-500">*</span></label></br>
-                                <input type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="ten_sanpham" value="" required></input>
+                                <input value="{{ $sanpham->ten_sanpham }}" type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="ten_sanpham" value="" required></input>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Hãng sản xuất <span class="text-red-500">*</span></label></br>
-                                        <input type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="hang_san_xuat" value="" required></input>
+                                        <input value="{{ $sanpham->hang_san_xuat }}" type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="hang_san_xuat" value="" required></input>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Bảo hành</label></br>
-                                        <input type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="bao_hanh" value="" required></input>
+                                        <input value="{{ $sanpham->bao_hanh }}" type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="bao_hanh" value="" required></input>
                                     </div>
                                 </div>
                             </div>
@@ -56,19 +57,19 @@
                                 <div class="col-md-4">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Giá nhập <span class="text-red-500">*</span></label></br>
-                                        <input type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_nhap" id="gia_nhap" ></input>
+                                        <input value="{{ $sanpham->gia_nhap_vnd }}" type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_nhap" id="gia_nhap" ></input>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Giá niêm yết <span class="text-red-500">*</span></label></br>
-                                        <input type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_niem_yet" id="gia_niem_yet" ></input>
+                                        <input value="{{ $sanpham->gia_niem_yet_vnd }}" type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_niem_yet" id="gia_niem_yet" ></input>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Giá khuyến mãi <span class="text-red-500">*</span></label></br>
-                                        <input type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_khuyen_mai" id="gia_khuyen_mai"></input>
+                                        <input value="{{ $sanpham->gia_khuyen_mai_vnd }}" type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_khuyen_mai" id="gia_khuyen_mai"></input>
                                     </div>
                                 </div>
                             </div> 
@@ -76,7 +77,12 @@
                                 <label class="text-xl text-gray-600">Loại sản phẩm</label></br> 
                                 <select style="width: 370px" name="loaisanpham_id" class="w-1/3 py-2 px-2 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-none focus:border-transparent">
                                     @foreach ($loaisanphams as $loaisanpham) 
-                                        <option value="{{ $loaisanpham->id }}">{{ $loaisanpham->ten_loai_sanpham }}</option>
+                                        <option 
+                                            @if($loaisanpham->id == $sanpham->loaisanpham_id) 
+                                                selected
+                                            @endif value="{{ $loaisanpham->id }}">
+                                            {{ $loaisanpham->ten_loai_sanpham }}
+                                        </option>
                                     @endforeach 
                                 </select>
                             </div>
@@ -89,7 +95,7 @@
                             <div class="mb-8">
                                 <label class="text-xl text-gray-600">Thông tin khuyến mãi</label></br> 
                                 <textarea id="editor" name="thong_tin_khuyen_mai">
-                                    Liên hệ
+                                    {{ $sanpham->thong_tin_khuyen_mai }}
                                 </textarea>
                             </div> 
                             <div class="mb-8">  
@@ -102,9 +108,12 @@
                                          
                                     </p>
                                   </header>
-                                <div id="thumb-output"></div> 
-                            </div>
-    
+                                <div id="thumb-output">
+                                </div> 
+                            </div> 
+                            @foreach ($sanpham->hinhanh as $index => $hinhanh) 
+                                <img src="{{ url($hinhanh->duong_dan_hinh_anh) }}" alt="" class="thumb" onclick="remove('img_{{ $index}}')" id="img_{{$index}}">
+                            @endforeach
                             <div class="flex p-1">
                                 <select class="border-2 border-gray-300 border-r p-2 rounded-tl rounded-bl" name="trang_thai">
                                     <option value="1">Lưu và công khai</option>
@@ -122,8 +131,9 @@
 @push('scripts') 
 <script src="{{ asset('js/ckeditor.js') }}"></script>
 <script>
-    ClassicEditor.create(document.querySelector('#editor')) 
-    ClassicEditor.create(document.querySelector('#editor2')) 
+    ClassicEditor.create(document.querySelector('#editor'))
+    ClassicEditor.create(document.querySelector('#editor2'))
+     
    $('#gia_nhap').add('#gia_niem_yet').add('#gia_khuyen_mai').on('input', function(e){        
         $(this).val(formatCurrency(this.value.replace(/[,]/g,'')));
     }).on('keypress',function(e){
