@@ -23,6 +23,7 @@
             border-right: 25px solid transparent;
         }
     </style>
+    @stack('styles')
 </head>
 <body>   
     <nav class="navbar navbar-expand-lg p-0 text-white bg-indigo-700" style="background-color: rgba(67, 56, 202,1)">
@@ -47,7 +48,7 @@
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: rgba(79, 70, 229,1)">
         <div class="container-fluid"> 
-            <a class="navbar-brand text-white w-60" href="#">
+            <a class="navbar-brand text-white w-60" href="/">
                 <img src="img/logo.png" alt="" width="120" height="100" class="d-inline-block align-text-center ">
                 Computer
             </a> 
@@ -124,5 +125,6 @@
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>
