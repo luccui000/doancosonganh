@@ -1,7 +1,7 @@
 <div class="container-fluid border-t-2 border-indigo-700 bg-white pb-2"> 
     <div class="text-sm lg:flex-grow  animated jackinthebox">
         <a class="relative inline-block lg:inline-block text-md font-bold  text-orange-500  mx-2 sm:hover:bg-transparent rounded-lg">
-            <div class="bg-indigo-700 text-white w-44 p-2">Top sản phẩm bán chạy </div> 
+            <div class="bg-indigo-700 text-white w-44 p-2 box-child">Top sản phẩm bán chạy </div> 
             <div class="triangle"></div>
         </a>
         <a href="#home"

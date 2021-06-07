@@ -1,8 +1,7 @@
 <div class="container-fluid border-t-2 border-indigo-700 bg-white mt-4 pb-2"> 
     <div class="text-sm lg:flex-grow  animated jackinthebox">
         <a class="relative inline-block lg:inline-block text-md font-bold  text-orange-500  mx-2 sm:hover:bg-transparent rounded-lg">
-            <div class="bg-indigo-700 text-white w-52 p-2">{{ $danhmucsanpham }}</div> 
-            <div class="triangle"></div>
+            <div class="bg-indigo-700 text-white w-52 p-2 box-child">{{ $danhmucsanpham }}</div>  
         </a>
         <a href="#home"
             class="block lg:inline-block text-md font-bold hover:no-underline text-orange-500 uppercase mx-2">

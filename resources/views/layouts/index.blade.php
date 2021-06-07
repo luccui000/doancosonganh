@@ -13,6 +13,15 @@
         body {
             font-family: 'Roboto', sans-serif;
         }  
+        .box-child::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: -25px;
+            border-top: 36px solid #4338ca;
+            border-right: 25px solid transparent;
+        }
     </style>
 </head>
 <body>   
