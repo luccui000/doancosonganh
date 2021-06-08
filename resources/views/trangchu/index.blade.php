@@ -48,8 +48,8 @@
             </div>
             <div class="flex-1">
                 <div class="flex flex-col">
-                    <div class="uppercase font-semibold">Chính sách giao hàng</div>
-                    <div>Nhận hàng và thanh toán tại nhà</div>
+                    <div class="uppercase font-semibold">Đổi trả dễ dàng</div>
+                    <div>Dùng thử trong vòng 3 ngày</div>
                 </div>
             </div>
         </div>
@@ -62,8 +62,8 @@
             </div>
             <div class="flex-1">
                 <div class="flex flex-col">
-                    <div class="uppercase font-semibold">Chính sách giao hàng</div>
-                    <div>Nhận hàng và thanh toán tại nhà</div>
+                    <div class="uppercase font-semibold">Thanh toán tiện lợi</div>
+                    <div>Trả tiền mặt, CK, trả góp 0%</div>
                 </div>
             </div>
         </div>
@@ -76,8 +76,8 @@
             </div>
             <div class="flex-1">
                 <div class="flex flex-col">
-                    <div class="uppercase font-semibold">Chính sách giao hàng</div>
-                    <div>Nhận hàng và thanh toán tại nhà</div>
+                    <div class="uppercase font-semibold">Hỗ trợ nhiệt tình</div>
+                    <div>Tư vấn, giải đáp mọi thắc mắc</div>
                 </div>
             </div>
         </div> 
@@ -88,114 +88,96 @@
             <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
                 <!-- Col Title -->
                 <div class="text-xs uppercase text-gray-400 font-medium mb-6">
-                    Getting Started
+                    Thông tin chung
                 </div>
 
                 <!-- Links -->
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Installation
+                    Giới thiệu về cửa hàng
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Release Notes
+                    Tin tức
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Upgrade Guide
+                    Liên hệ - góp ý
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Using with Preprocessors
+                    Khách hàng doanh nghiệp
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Optimizing for Production
-                </a>
-                <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Browser Support
-                </a>
-                <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    IntelliSense
-                </a>
+                    Xây dựng cấu hình
+                </a> 
             </div>
 
             <!-- Col-2 -->
             <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
                 <!-- Col Title -->
                 <div class="text-xs uppercase text-gray-400 font-medium mb-6">
-                    Core Concepts
+                    Hỗ trợ khách hàng
                 </div>
 
                 <!-- Links -->
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Utility-First
+                    Hướng dẫn mua hàng trực tuyến
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Responsive Design
+                    Hướng dẫn thanh toán
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Hover, Focus, & Other States
+                    Hướng dẫn mua hàng trả góp
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Dark Mode
-                </a>
-                <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Adding Base Styles
-                </a>
-                <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Extracting Components
-                </a>
-                <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Adding New Utilities
-                </a>
+                    In hóa đơn điện tử
+                </a> 
             </div>
 
             <!-- Col-3 -->
             <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
                 <!-- Col Title -->
                 <div class="text-xs uppercase text-gray-400 font-medium mb-6">
-                    Customization
+                    Chính sách chung
                 </div>
 
                 <!-- Links -->
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Configuration
+                    Chính sách vận chuyển
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Theme Configuration
+                    Chính sách bảo hành
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Breakpoints
+                    Chính sách đổi trả và hoàn tiền
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Customizing Colors
+                    Chính sách cho doanh nghiệp
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Customizing Spacing
+                    Chính sách hàng chính hãng
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Configuring Variants
-                </a>
-                <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Plugins
-                </a>
+                    Bảo mật thông tin khách hàng
+                </a> 
             </div>
 
             <!-- Col-3 -->
             <div class="p-5 w-1/2 sm:w-4/12 md:w-3/12">
                 <!-- Col Title -->
                 <div class="text-xs uppercase text-gray-400 font-medium mb-6">
-                    Community
+                    Tổng đài hỗ trợ
                 </div>
 
                 <!-- Links -->
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    GitHub
+                    KD online: 1900.0323 phím 1 
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Discord
+                    KD 49 Thái Hà - HN: 1900.0123 phím 6
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    Twitter
+                    KD 151 Lê Thanh Nghị - HN: 1900.0323 phím 4 
                 </a>
                 <a href="#" class="my-3 block text-gray-300 hover:text-gray-100 text-sm font-medium duration-700">
-                    YouTube
+                    Kỹ thuật - Bảo hành Hà Nội: 1900.0323 phím 8 
                 </a>
             </div>
         </div>
@@ -206,7 +188,8 @@
                 border-t border-gray-500 text-gray-400 text-sm 
                 flex-col md:flex-row max-w-6xl">
                 <div class="mt-2">
-                    © Copyright 1998-year. All Rights Reserved.
+                     Trang web phát triển bởi Thạch Minh Lực - DA19TTA - 110119025 dựa theo trang thương mại điện tử 
+                     <a href="https://www.anphatpc.com.vn/" class="text-gray-200 hover:text-gray-100 hover:no-underline">https://www.anphatpc.com.vn/</a>
                 </div>
 
                 <!-- Required Unicons (if you want) -->

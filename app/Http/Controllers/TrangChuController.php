@@ -14,7 +14,7 @@ class TrangChuController extends Controller
     }
     public function show($id)
     {
-        $sanpham = SanPham::findOrFail($id);
+        $sanpham = SanPham::where('duong_dan_lien_ket', $id)->first(); 
         return view('trangchu.show', [
             'sanpham' => $sanpham
         ]);

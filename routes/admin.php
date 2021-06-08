@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function() { return redirect()->route('admin.dangnhap'); });
+Route::get('/dangnhap', [App\Http\Controllers\XacThucController::class, 'dangnhap'])->name('admin.dangnhap');
+Route::post('/dangnhap', [App\Http\Controllers\XacThucController::class, 'xacthuc'])->name('admin.xacthuc');
 
 Route::group(['as' => 'admin.sanpham.', 'prefix' => 'sanpham'], function() {
     Route::get('/', [App\Http\Controllers\SanPhamController::class, 'index'])->name('index');

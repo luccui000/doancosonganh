@@ -49,9 +49,9 @@
                                 <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->hang_san_xuat }}">{{ $sanpham->hang_san_xuat }}</div></td>  
                                 <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->thong_tin_khuyen_mai }}">{{ $sanpham->thong_tin_khuyen_mai }}</div></td> 
                                 <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->bao_hanh }}">{{ $sanpham->bao_hanh }}</div></td> 
-                                <td class="p-2"><div class="text-center text-green-500">{{ $sanpham->gia_nhap_vnd }}</div></td> 
-                                <td class="p-2"><div class="text-center text-green-500">{{ $sanpham->gia_niem_yet_vnd }}</div></td> 
-                                <td class="p-2"><div class="text-center text-blue-500  text-lg">{{ $sanpham->gia_khuyen_mai_vnd }}</div></td> 
+                                <td class="p-2"><div class="text-center">{{ $sanpham->gia_nhap_vnd }}</div></td> 
+                                <td class="p-2"><div class="text-center">{{ $sanpham->gia_niem_yet_vnd }}</div></td> 
+                                <td class="p-2"><div class="text-center text-red-500  text-lg">{{ $sanpham->gia_khuyen_mai_vnd }}</div></td> 
                                 <td class="">
                                     <div class="flex item-center justify-center">
                                         <a class="w-4 mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">

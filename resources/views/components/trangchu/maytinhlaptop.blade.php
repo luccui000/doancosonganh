@@ -21,7 +21,7 @@
             @foreach ($sanphams as $sanpham) 
                 @if($sanpham->loaisanpham->id == $loaisanpham)
                     <div class="flex flex-col items-left justify-center bg-white p-1 hover:shadow-md rounded-lg cursor-pointer">
-                        <div class="inline-flex shadow-lg border border-gray-200 overflow-hidden h-full w-full">
+                        <a href="{{ $sanpham->duong_dan_lien_ket }}" class="hover:no-underline inline-flex shadow-lg border border-gray-200 overflow-hidden h-full w-full">
                             <img
                                 @if(isset($sanpham->hinhanh[0]))  
                                     src="{{ $sanpham->hinhanh[0]->duong_dan_hinh_anh }}"
@@ -29,7 +29,7 @@
                                 alt="Placeholder"
                                 class="object-cover "
                                 />
-                        </div>  
+                        </a>  
                         <p class="text-sm mb-0 font-normal">Mã SP : {{ $sanpham->ma_sanpham }}</p> 
                         <p class="text-sm mb-0 font-normal">{{ $sanpham->ten_sanpham }}</p> 
                         <p class="text-sm mb-0 font-normal line-through">{{ $sanpham->gia_niem_yet_vnd }} </p> 

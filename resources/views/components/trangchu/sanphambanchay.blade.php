@@ -21,13 +21,13 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4"> 
             @foreach ($sanphams->take(12) as $sanpham)
                 <div class="flex flex-col items-left justify-center bg-white p-1 hover:shadow-md rounded-lg cursor-pointer">
-                    <div class="inline-flex shadow-lg border border-gray-200 overflow-hidden h-full w-full">
+                    <a href="{{ $sanpham->duong_dan_lien_ket }}" class="hover:no-underline inline-flex shadow-lg border border-gray-200 overflow-hidden h-full w-full">
                         <img
                             src="{{ $sanpham->hinh_anh_san_pham }}" 
                             alt="{{ $sanpham->ten_sanpham }}"
                             class="object-cover "
                             />
-                    </div>  
+                    </a>  
                     <p class="text-sm mb-0 font-normal">Mã SP : {{ $sanpham->ma_sanpham }}</p> 
                     <p class="text-sm mb-0 font-normal">{{ $sanpham->ten_sanpham }}</p> 
                     <p class="text-sm mb-0 font-normal line-through">{{ $sanpham->gia_niem_yet_vnd }} </p> 
