@@ -29,7 +29,7 @@
         </header>
         <div class="p-3"> 
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white overflow-hidden sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
                         <form method="POST" action="{{ route('admin.sanpham.store') }}" enctype="multipart/form-data">
                             @csrf
@@ -41,45 +41,66 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-4">
-                                        <label class="text-xl text-gray-600">Hãng sản xuất <span class="text-red-500">*</span></label></br>
-                                        <input type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="hang_san_xuat" value="" required></input>
+                                        <label class="text-xl text-gray-600">Hãng sản xuất <span class="text-red-500">*</span></label> 
+                                        <select name="hangsanxuat_id" class="w-full p-2 py-2 px-2 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-none focus:border-transparent">
+                                            @foreach ($hangsanxuats as $hangsanxuat) 
+                                                <option value="{{ $hangsanxuat->id }}">{{ $hangsanxuat->ten_hang }}</option>
+                                            @endforeach 
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-4">
-                                        <label class="text-xl text-gray-600">Bảo hành</label></br>
-                                        <input type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="bao_hanh" value="" required></input>
+                                        <label class="text-xl text-gray-600">Bảo hành</label> 
+                                        <select name="bao_hanh" class="w-full p-2 py-2 px-2 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-none focus:border-transparent">
+                                            <option value="3">3 tháng</option>
+                                            <option value="6">6 tháng</option>
+                                            <option value="9">9 tháng</option>
+                                            <option value="12">12 tháng</option>
+                                            <option value="24">24 tháng</option>
+                                            <option value="36">36 tháng</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="mb-4">
-                                        <label class="text-xl text-gray-600">Giá nhập <span class="text-red-500">*</span></label></br>
-                                        <input type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_nhap" id="gia_nhap" ></input>
+                                        <label class="text-xl text-gray-600">Giá nhập <span class="text-red-500">*</span></label>
+                                        <input type="text" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_nhap" id="gia_nhap" ></input>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-4">
-                                        <label class="text-xl text-gray-600">Giá niêm yết <span class="text-red-500">*</span></label></br>
-                                        <input type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_niem_yet" id="gia_niem_yet" ></input>
+                                        <label class="text-xl text-gray-600">Giá niêm yết <span class="text-red-500">*</span></label>
+                                        <input type="text" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_niem_yet" id="gia_niem_yet" ></input>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-4">
-                                        <label class="text-xl text-gray-600">Giá khuyến mãi <span class="text-red-500">*</span></label></br>
-                                        <input type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_khuyen_mai" id="gia_khuyen_mai"></input>
+                                        <label class="text-xl text-gray-600">Giá khuyến mãi </label> 
+                                        <input type="text" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_khuyen_mai" id="gia_khuyen_mai"></input>
                                     </div>
                                 </div>
                             </div> 
-                            <div class="mb-8">
-                                <label class="text-xl text-gray-600">Loại sản phẩm</label></br> 
-                                <select style="width: 370px" name="loaisanpham_id" class="w-1/3 py-2 px-2 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-none focus:border-transparent">
-                                    @foreach ($loaisanphams as $loaisanpham) 
-                                        <option value="{{ $loaisanpham->id }}">{{ $loaisanpham->ten_loai_sanpham }}</option>
-                                    @endforeach 
-                                </select>
-                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-8">
+                                        <label class="text-xl text-gray-600">Loại sản phẩm <span class="text-red-500">*</span></label> 
+                                        <select name="hangsanxuat_id" class="w-full p-2 py-2 px-2 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-none focus:border-transparent">
+                                            @foreach ($loaisanphams as $loaisanpham) 
+                                                <option value="{{ $loaisanpham->id }}">{{ $loaisanpham->ten_loai_sanpham }}</option>
+                                            @endforeach 
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="text-xl text-gray-600">Số lượng tồn <span class="text-red-500">*</span></label> 
+                                        <input type="number" min="0" value="1" class="border-2 border-gray-300 p-2 w-full rounded-md" name="bao_hanh" value="" required></input>
+                                    </div>
+                                </div>
+                            </div> 
                             <div class="mb-8">
                                 <label class="text-xl text-gray-600">Chi tiết sản phẩm</label></br> 
                                 <textarea id="editor2" name="chi_tiet_thong_so">
@@ -96,7 +117,7 @@
                                 <header x-data="{}" class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
                                     <input type="file" id="file-input" x-ref="hinhanh" onchange="loadPreview(this)" name="hinhanh[]"  multiple />
                                     <button type="button" @click="$refs.hinhanh.click()" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
-                                       Tải file lên
+                                       Tải hình ảnh lên
                                     </button>
                                     <p class=" text-gray-600 flex flex-wrap justify-center helptext">
                                          
@@ -124,7 +145,7 @@
 <script>
     ClassicEditor.create(document.querySelector('#editor')) 
     ClassicEditor.create(document.querySelector('#editor2')) 
-   $('#gia_nhap').add('#gia_niem_yet').add('#gia_khuyen_mai').on('input', function(e){        
+   $('#gia_nhap').add('#gia_niem_yet').add('#gia_khuyen_mai').on('input', function(e){     
         $(this).val(formatCurrency(this.value.replace(/[,]/g,'')));
     }).on('keypress',function(e){
         if(!$.isNumeric(String.fromCharCode(e.which))) e.preventDefault();

@@ -13,16 +13,17 @@ class SanPham extends Model
     public $fillable = [
         'ma_sanpham',
         'ten_sanpham',
-        'duong_dan_lien_ket',
-        'hang_san_xuat',
+        'duong_dan_lien_ket', 
         'thong_tin_khuyen_mai',
+        'chi_tiet_thong_so',
         'bao_hanh',
         'gia_nhap',
         'gia_niem_yet',
         'gia_khuyen_mai',
         'trang_thai',
-        'chi_tiet_thong_so',
+        'so_luong_ton_kho',
 
+        'hangsanxuat_id',
         'loaisanpham_id',
     ]; 
     public function hinhanh()
@@ -32,6 +33,10 @@ class SanPham extends Model
     public function loaisanpham()
     {
         return $this->hasOne(LoaiSanPham::class, 'id', 'loaisanpham_id');
+    }
+    public function hangsanxuat()
+    {
+        return $this->hasOne(HangSanXuat::class, 'id', 'hangsanxuat_id');
     }
     public function getGiaNhapVndAttribute()
     {

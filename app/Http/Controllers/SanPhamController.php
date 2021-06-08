@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HangSanXuat;
 use App\Models\HinhAnh;
 use App\Models\LoaiSanPham;
 use App\Models\SanPham;
@@ -11,13 +12,17 @@ class SanPhamController extends Controller
 {
     public function index() 
     {
-        $sanphams = SanPham::with(['loaisanpham', 'hinhanh'])->get();
+        $sanphams = SanPham::with(['loaisanpham', 'hinhanh', 'hangsanxuat'])->get();
         return view('admin.sanpham.index', compact('sanphams'));
     }
     public function create()
     {
         $loaisanphams = LoaiSanPham::all();
-        return view('admin.sanpham.create', compact('loaisanphams'));
+        $hangsanxuats = HangSanXuat::all();
+        return view('admin.sanpham.create', [
+            'loaisanphams' => $loaisanphams,
+            'hangsanxuats' => $hangsanxuats
+        ]);
     }
     public function store(Request $request)
     {

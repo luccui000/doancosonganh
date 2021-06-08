@@ -17,16 +17,17 @@ class CreateSanPhamTable extends Migration
             $table->id();
             $table->string('ma_sanpham', 15);
             $table->string('ten_sanpham');
-            $table->string('duong_dan_lien_ket');
-            $table->string('hang_san_xuat', 100);
-            $table->text('thong_tin_khuyen_mai');
+            $table->string('duong_dan_lien_ket'); 
+            $table->text('thong_tin_khuyen_mai')->nullable();
+            $table->text('chi_tiet_thong_so');
             $table->string('bao_hanh');
             $table->double('gia_nhap');
             $table->double('gia_niem_yet');
             $table->double('gia_khuyen_mai'); 
+            $table->tinyInteger('trang_thai')->default(1);
+            $table->unsignedInteger('so_luong_ton_kho')->default(1);
 
-            $table->foreignId('danhmuc_thongso_id')->constrained('DANHMUC_THONGSO', 'id');
-            $table->foreignId('hinhanh_id')->constrained('HINHANH', 'id');
+            $table->foreignId('hangsanxuat_id')->constrained('HANGSANXUAT', 'id'); 
             $table->foreignId('loaisanpham_id')->constrained('LOAISANPHAM', 'id');
             $table->timestamps();
         });

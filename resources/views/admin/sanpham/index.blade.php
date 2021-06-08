@@ -22,17 +22,17 @@
                 <table class="table-auto w-full"> 
                     <thead class="text-xs uppercase text-gray-400 bg-gray-50 rounded-sm">
                         <tr> 
-                            <th class="p-2"><div class="font-semibold text-center">#</div> </th> 
-                            <th class="p-2"><div class="font-semibold text-center">Hình ảnh</div></th>
-                            <th class="p-2"><div class="font-semibold text-center">Tên sản phẩm</div></th>
-                            <th class="p-2"><div class="font-semibold text-center truncate">Đường dẫn liên kết</div></th>
-                            <th class="p-2"><div class="font-semibold text-center">Hãng sản xuất</div></th> 
-                            <th class="p-2"><div class="font-semibold text-center">Thông tin khuyến mãi</div></th>
-                            <th class="p-2"><div class="font-semibold text-center">Bảo hành</div></th>
-                            <th class="p-2"><div class="font-semibold text-center">Giá nhập</div></th>
-                            <th class="p-2"><div class="font-semibold text-center">Giá niêm yết</div></th>
-                            <th class="p-2"><div class="font-semibold text-center">Giá nhập</div></th> 
-                            <th class="p-2"><div class="font-semibold text-center"></div></th> 
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center">#</div> </th> 
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Hình ảnh</div></th>
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Tên sản phẩm</div></th>
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center truncate">Đường dẫn liên kết</div></th>
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Hãng sản xuất</div></th> 
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Thông tin khuyến mãi</div></th>
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Bảo hành</div></th>
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Giá nhập</div></th>
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Giá niêm yết</div></th>
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Giá nhập</div></th> 
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center"></div></th> 
                         </tr>
                     </thead>
                     <tbody class="text-sm font-medium divide-y divide-gray-100">  
