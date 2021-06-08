@@ -13,9 +13,9 @@ class HangSanXuat extends Model
         'ten_hang',
         'dia_chi',
         'email',
-        'dienthoai',
+        'dien_thoai',
         'website', 
-        'trangthai',
+        'trang_thai',
     ];
     public const VALIDATION_RULES = [
         'ten_hang' => 'required', 

@@ -12,4 +12,14 @@ class MyApp {
         'DIENTHOAIDIDONG' => 7,
     ];
     const MA_LOAI_SAN_PHAM = ['MM', 'ML', 'TB', 'LK', 'MH', 'LT', 'DT'];
+    const UNDEFINE_IMAGE = 'storage/undefine.png';
+    const THONG_TIN_BAO_HANH = [
+        '3' => '3 tháng',
+        '6' => '6 tháng',
+        '9' => '9 tháng',
+        '12' => '12 tháng',
+        '24' => '24 tháng',
+        '36' => '36 tháng',
+        '0' => 'Bảo hành theo từng linh kiện',
+    ];
 }

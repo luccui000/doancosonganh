@@ -43,13 +43,30 @@
                                 <div class="col-md-6">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Hãng sản xuất <span class="text-red-500">*</span></label></br>
-                                        <input value="{{ $sanpham->hang_san_xuat }}" type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="hang_san_xuat" value="" required></input>
+                                        <select style="width: 370px" name="hangsanxuat_id" class="w-1/3 py-2 px-2 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-none focus:border-transparent">
+                                            @foreach ($hangsanxuats as $hangsanxuat) 
+                                                <option 
+                                                    @if($hangsanxuat->id == $sanpham->hangsanxuat_id) 
+                                                        selected
+                                                    @endif value="{{ $hangsanxuat->id }}">
+                                                    {{ $hangsanxuat->ten_hang }}
+                                                </option>
+                                            @endforeach 
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Bảo hành</label></br>
-                                        <input value="{{ $sanpham->bao_hanh }}" type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="bao_hanh" value="" required></input>
+                                        <select name="bao_hanh" class="w-full p-2 py-2 px-2 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-none focus:border-transparent">
+                                            @foreach (App\MyApp::THONG_TIN_BAO_HANH as $key => $value)
+                                                <option 
+                                                    @if($key == $sanpham->bao_hanh) 
+                                                        selected
+                                                    @endif 
+                                                    value="{{ $key }}">{{ $value }}</option> 
+                                            @endforeach 
+                                        </select>
                                     </div>
                                 </div>
                             </div>

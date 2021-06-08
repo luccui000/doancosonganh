@@ -46,9 +46,9 @@
                                 </td>
                                 <td class="p-2"><div style="max-width: 300px;" class="text-center text-truncate" title="{{ $sanpham->ten_sanpham }}">{{ $sanpham->ten_sanpham }}</div></td> 
                                 <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate"  title="{{ $sanpham->duong_dan_lien_ket }}">{{ $sanpham->duong_dan_lien_ket }}</div></td> 
-                                <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->hang_san_xuat }}">{{ $sanpham->hang_san_xuat }}</div></td>  
+                                <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->hangsanxuat->ten_hang }}">{{ $sanpham->hangsanxuat->ten_hang }}</div></td>  
                                 <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->thong_tin_khuyen_mai }}">{{ $sanpham->thong_tin_khuyen_mai }}</div></td> 
-                                <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->bao_hanh }}">{{ $sanpham->bao_hanh }}</div></td> 
+                                <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ App\MyApp::THONG_TIN_BAO_HANH[$sanpham->bao_hanh] }}">{{ App\MyApp::THONG_TIN_BAO_HANH[$sanpham->bao_hanh] }}</div></td> 
                                 <td class="p-2"><div class="text-center">{{ $sanpham->gia_nhap_vnd }}</div></td> 
                                 <td class="p-2"><div class="text-center">{{ $sanpham->gia_niem_yet_vnd }}</div></td> 
                                 <td class="p-2"><div class="text-center text-red-500  text-lg">{{ $sanpham->gia_khuyen_mai_vnd }}</div></td> 

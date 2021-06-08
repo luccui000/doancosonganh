@@ -53,12 +53,9 @@
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Bảo hành</label> 
                                         <select name="bao_hanh" class="w-full p-2 py-2 px-2 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-none focus:border-transparent">
-                                            <option value="3">3 tháng</option>
-                                            <option value="6">6 tháng</option>
-                                            <option value="9">9 tháng</option>
-                                            <option value="12">12 tháng</option>
-                                            <option value="24">24 tháng</option>
-                                            <option value="36">36 tháng</option>
+                                            @foreach (App\MyApp::THONG_TIN_BAO_HANH as $key => $value)
+                                                <option value="{{ $key }}">{{ $value }}</option> 
+                                            @endforeach 
                                         </select>
                                     </div>
                                 </div>
@@ -87,7 +84,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-8">
                                         <label class="text-xl text-gray-600">Loại sản phẩm <span class="text-red-500">*</span></label> 
-                                        <select name="hangsanxuat_id" class="w-full p-2 py-2 px-2 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-none focus:border-transparent">
+                                        <select name="loaisanpham_id" class="w-full p-2 py-2 px-2 rounded border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-none focus:border-transparent">
                                             @foreach ($loaisanphams as $loaisanpham) 
                                                 <option value="{{ $loaisanpham->id }}">{{ $loaisanpham->ten_loai_sanpham }}</option>
                                             @endforeach 

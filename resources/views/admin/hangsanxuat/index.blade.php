@@ -28,7 +28,7 @@
                         <td class="p-3"><div class="text-center">{{ $loop->iteration }}</div></td>
                         <td class="p-3"><div class="text-center">{{ $hangsanxuat->ten_hang }}</div></td>
                         <td class="p-3"><div class="text-center">{{ $hangsanxuat->dia_chi }}</div></td>
-                        <td class="p-3 text-center"><a href="tel:{{ $hangsanxuat->dienthoai }}" class="hover:no-underline cursor-pointer text-gray-700">{{ $hangsanxuat->dienthoai }}</a></td>
+                        <td class="p-3 text-center"><a href="tel:{{ $hangsanxuat->dien_thoai }}" class="hover:no-underline cursor-pointer text-gray-700">{{ $hangsanxuat->dien_thoai }}</a></td>
                         <td class="p-3 text-center"><a href="mailto:{{ $hangsanxuat->email }}" class="hover:no-underline cursor-pointer">{{ $hangsanxuat->email }}</a></td>
                         <td class="p-3 text-center"><a href="{{ $hangsanxuat->website }}">{{ $hangsanxuat->website }}</a></td>
                         <td class="">

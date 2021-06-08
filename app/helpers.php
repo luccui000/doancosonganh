@@ -1,5 +1,7 @@
 <?php
- 
+
+use App\MyApp;
+
 if ( ! function_exists( 'money_format' ) ) {
 
     function money_format($format, $number)
@@ -110,7 +112,18 @@ if(!function_exists('tieng_viet_khong_dau'))
         $str = strtolower($str);
         $str = preg_replace("/( )/", '_', $str);
         return $str;
+    } 
+}
+if(!function_exists('lay_key_thong_tin_bao_hanh')) 
+{
+    function lay_key_thong_tin_bao_hanh()
+    {
+        $arr = array_keys(MyApp::THONG_TIN_BAO_HANH);
+        $convertArray = '';
+        foreach($arr as $key => $value) { 
+            $key != 0 ? $convertArray .= ','.$value : $convertArray .= $value; 
+        }
+        dd($convertArray);
+        return $convertArray;
     }
-
-
 }

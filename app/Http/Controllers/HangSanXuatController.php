@@ -20,7 +20,7 @@ class HangSanXuatController extends Controller
     public function store(Request $request)
     {
         $request->validate(HangSanXuat::VALIDATION_RULES, HangSanXuat::VALIDATION_MESSAGES);
-        HangSanXuat::create($request->only(['ten_hang', 'dia_chi', 'email', 'dienthoai', 'website', 'trangthai']));
+        HangSanXuat::create($request->only(['ten_hang', 'dia_chi', 'email', 'dien_thoai', 'website', 'trang_thai']));
         return redirect()->route('admin.hangsanxuat.index');
     }
     public function edit($id)
@@ -32,7 +32,7 @@ class HangSanXuatController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate(HangSanXuat::VALIDATION_RULES, HangSanXuat::VALIDATION_MESSAGES);
-        HangSanXuat::where('id', $id)->update($request->only(['ten_hang', 'dia_chi', 'email', 'dienthoai', 'website', 'trangthai']));
+        HangSanXuat::where('id', $id)->update($request->only(['ten_hang', 'dia_chi', 'email', 'dien_thoai', 'website', 'trang_thai']));
         return redirect()->route('admin.hangsanxuat.index');
     }
 }

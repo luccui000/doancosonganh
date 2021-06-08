@@ -37,7 +37,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Số điện thoại</label></br>
-                                        <input type="tel" class="border-2 border-gray-300 p-2 w-full rounded-md" name="dienthoai" value="{{ $hangsanxuat->dienthoai }}"></input>
+                                        <input type="tel" class="border-2 border-gray-300 p-2 w-full rounded-md" name="dien_thoai" value="{{ $hangsanxuat->dienthoai }}"></input>
                                     </div>
                                 </div>
                             </div>  
