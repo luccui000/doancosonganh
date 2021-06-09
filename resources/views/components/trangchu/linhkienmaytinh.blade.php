@@ -17,8 +17,8 @@
         </a> 
     </div> 
     <div class="flex flex-col mb-2"> 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
-            @foreach ($sanphams->take(6) as $sanpham) 
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4"> 
+            @foreach ($sanphams as $sanpham) 
                 @if($sanpham->loaisanpham->id == $loaisanpham)
                     <div class="flex flex-col items-left justify-center bg-white p-1 hover:shadow-md rounded-lg cursor-pointer">
                         <a href="{{ $sanpham->duong_dan_lien_ket }}" class="hover:no-underline inline-flex shadow-lg border border-gray-200 overflow-hidden h-full w-full">

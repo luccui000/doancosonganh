@@ -24,6 +24,7 @@
         }
     </style>
     @stack('styles')
+    @livewireStyles
 </head>
 <body>   
     <nav class="navbar navbar-expand-lg p-0 text-white bg-indigo-700" style="background-color: rgba(67, 56, 202,1)">
@@ -55,7 +56,7 @@
             <div class="relative w-1/2">
                 <input
                     class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded-full shadow"
-                    placeholder="Search..."
+                    placeholder="Tìm kiếm..."
                 /> 
                 <button class="absolute right-0 bottom-2 mt-5 mr-3">
                     <svg class="text-gray-800 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +103,7 @@
                         </div> 
                     </li>  
                     <li class="nav-item cursor-pointer">
-                        <div class="nav-link w-32 text-sm "  href="#">
+                        <a class="nav-link w-32 text-sm "  href="{{ route('trangchu.xemgiohang') }}"> 
                             <div class="flex">
                                 <div class="w-3/12 "> 
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white ml-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -113,7 +114,7 @@
                                     Giỏ hàng
                                 </div>
                             </div>
-                        </div> 
+                        </a> 
                     </li> 
                 </ul> 
             </div>
@@ -122,6 +123,7 @@
     <main class="h-screen">
         @yield('content')
     </main>
+    @livewireScripts
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>

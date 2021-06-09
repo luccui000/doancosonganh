@@ -13,6 +13,7 @@ Route::group(['as' => 'admin.sanpham.', 'prefix' => 'sanpham'], function() {
     Route::post('/', [Controllers\SanPhamController::class, 'store'])->name('store');
     Route::get('/{id}', [Controllers\SanPhamController::class, 'edit'])->name('edit');
     Route::put('/{id}/update', [Controllers\SanPhamController::class, 'update'])->name('update');
+    Route::delete('/{id}', [Controllers\SanPhamController::class, 'destroy'])->name('destroy');
 });
 Route::group(['as' => 'admin.hangsanxuat.', 'prefix' => 'hangsanxuat'], function () {
     Route::get('/', [Controllers\HangSanXuatController::class, 'index'])->name('index');

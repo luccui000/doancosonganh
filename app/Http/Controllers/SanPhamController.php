@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HangSanXuat;
+use App\MyApp;
 use App\Models\HinhAnh;
-use App\Models\LoaiSanPham;
 use App\Models\SanPham;
+use App\Models\HangSanXuat;
+use App\Models\LoaiSanPham;
 use Illuminate\Http\Request;
 
 class SanPhamController extends Controller
@@ -26,17 +27,28 @@ class SanPhamController extends Controller
     }
     public function store(Request $request)
     {
+        $giaNiemYet = $this->setPriceWhenNull($request->input('gia_niem_yet'), $request->input('gia_nhap'));
+        $giaKhuyenMai = $this->setPriceWhenNull($request->input('gia_khuyen_mai'), $giaNiemYet);
+
         $request->validate(SanPham::VALIDATION_RULES, SanPham::VALIDATION_MESSAGES);
+    
+        // Tự động thêm đường dẫn liên kết sản phẩm
+        $duongDanLienKet = tieng_viet_khong_dau($request->input('ten_sanpham')). '_id' . rand(1000, 9999);
+        // Tự động thêm mã cho sản phẩm  
+        $prefix = MyApp::MA_LOAI_SAN_PHAM[request()->input('loaisanpham_id')  - 1];
+        $latestId = SanPham::latest()->first()->id;
+        $maSanPham = $prefix . str_pad($latestId, 4, '0', STR_PAD_LEFT);
+        
         $sanpham = SanPham::create([ 
             'ten_sanpham' => $request->input('ten_sanpham'), 
-            'ma_sanpham' => " ", 
-            'duong_dan_lien_ket' => " ",  
+            'ma_sanpham' => $maSanPham, 
+            'duong_dan_lien_ket' => $duongDanLienKet,  
             'chi_tiet_thong_so' => $request->input('chi_tiet_thong_so'),
             'thong_tin_khuyen_mai' => $request->input('thong_tin_khuyen_mai'),
             'bao_hanh' => $request->input('bao_hanh'),
             'gia_nhap' => str_replace(',', '', $request->input('gia_nhap')) ,
-            'gia_niem_yet' =>  str_replace(',', '', $request->input('gia_niem_yet')),
-            'gia_khuyen_mai' =>  str_replace(',', '', $request->input('gia_khuyen_mai')),
+            'gia_niem_yet' =>  str_replace(',', '', $giaNiemYet),
+            'gia_khuyen_mai' =>  str_replace(',', '', $giaKhuyenMai),
             'trang_thai' => $request->input('trang_thai'),
 
             'hangsanxuat_id' => $request->input('hangsanxuat_id'),
@@ -75,8 +87,55 @@ class SanPhamController extends Controller
             'hangsanxuats' => $hangsanxuats
         ]);
     }
-    public function update(Request $request, SanPham $sanpham)
+    public function update(Request $request, $id)
+    { 
+        // dd($request->input());
+        $giaNiemYet = $this->setPriceWhenNull($request->input('gia_niem_yet'), $request->input('gia_nhap'));
+        $giaKhuyenMai = $this->setPriceWhenNull($request->input('gia_khuyen_mai'), $giaNiemYet);
+
+        // $request->validate(SanPham::VALIDATION_RULES, SanPham::VALIDATION_MESSAGES);
+        
+        $sanpham = SanPham::where('id', $id)->update([
+            'ten_sanpham' => $request->input('ten_sanpham'),  
+            'duong_dan_lien_ket' => $request->input('duong_dan_lien_ket'),  
+            'chi_tiet_thong_so' => $request->input('chi_tiet_thong_so'),
+            'thong_tin_khuyen_mai' => $request->input('thong_tin_khuyen_mai'),
+            'bao_hanh' => $request->input('bao_hanh'),
+            'gia_nhap' => str_replace(',', '', $request->input('gia_nhap')) ,
+            'gia_niem_yet' =>  str_replace(',', '', $giaNiemYet),
+            'gia_khuyen_mai' =>  str_replace(',', '', $giaKhuyenMai),
+            'trang_thai' => $request->input('trang_thai'),
+    
+            'hangsanxuat_id' => $request->input('hangsanxuat_id'),
+            'loaisanpham_id' => $request->input('loaisanpham_id')
+
+        ]); 
+        if($request->hasFile('hinhanh')) 
+        {
+            foreach($request->file('hinhanh') as $file)
+            {  
+                $tenSanPham = tieng_viet_khong_dau($request->input('ten_sanpham'));
+                $extension = $file->getClientOriginalExtension(); 
+                $fileNameToStore = date('dmy_hms').'_'.$tenSanPham. '_'.rand(1000, 9999).'.'.$extension; 
+                $file->storeAs('public', $fileNameToStore );
+                $idHinhAnh = HinhAnh::insertGetId([
+                    'duong_dan_hinh_anh' => 'storage/' . $fileNameToStore,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+                $sanpham->hinhanh()->attach($idHinhAnh);
+            } 
+        }  
+        // SanPham
+        return redirect()->route('admin.sanpham.index');
+    }
+    public function destroy($id)
+    {    
+        SanPham::destroy($id);
+        return redirect()->route('admin.sanpham.index');
+    }
+    public function setPriceWhenNull($priceNull, $priceNotNull)
     {
-        // $request->validate()
+        return $priceNull === '0' ? $priceNotNull : $priceNull;
     }
 }

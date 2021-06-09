@@ -36,6 +36,7 @@
                             <div class="mb-4">
                                 <label class="text-xl text-gray-600">Tên sản phẩm <span class="text-red-500">*</span></label></br>
                                 <input type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="ten_sanpham" value="" required></input>
+                                @error('ten_sanpham') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                             </div>
                             
                             <div class="row">
@@ -47,6 +48,7 @@
                                                 <option value="{{ $hangsanxuat->id }}">{{ $hangsanxuat->ten_hang }}</option>
                                             @endforeach 
                                         </select>
+                                        @error('hangsanxuat_id') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -57,6 +59,7 @@
                                                 <option value="{{ $key }}">{{ $value }}</option> 
                                             @endforeach 
                                         </select>
+                                        @error('bao_hanh') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -65,12 +68,14 @@
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Giá nhập <span class="text-red-500">*</span></label>
                                         <input type="text" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_nhap" id="gia_nhap" ></input>
+                                        @error('gia_nhap') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-4">
-                                        <label class="text-xl text-gray-600">Giá niêm yết <span class="text-red-500">*</span></label>
+                                        <label class="text-xl text-gray-600">Giá niêm yết </label>
                                         <input type="text" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_niem_yet" id="gia_niem_yet" ></input>
+                                        @error('gia_niem_yet') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -89,12 +94,14 @@
                                                 <option value="{{ $loaisanpham->id }}">{{ $loaisanpham->ten_loai_sanpham }}</option>
                                             @endforeach 
                                         </select>
+                                        @error('loaisanpham_id') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Số lượng tồn <span class="text-red-500">*</span></label> 
-                                        <input type="number" min="0" value="1" class="border-2 border-gray-300 p-2 w-full rounded-md" name="bao_hanh" value="" required></input>
+                                        <input type="number" min="0" value="1" class="border-2 border-gray-300 p-2 w-full rounded-md" name="so_luong_ton_kho" value="" required></input>
+                                        @error('so_luong_ton_kho') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
                             </div> 

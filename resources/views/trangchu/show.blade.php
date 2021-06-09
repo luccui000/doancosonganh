@@ -66,36 +66,18 @@
           </div>
         </div>
       </div>
-      <div class="flex mt-6 items-center pb-5 border-b-2  border-gray-200 mb-5 relative"> 
+      <div class="flex mt-6 items-center pb-5 border-b-2  border-gray-200 mb-2 relative"> 
         <div class="absolute bg-red-600 w-32 h-10 top-2 -left-4 z-10 p-2 text-white font-bold text-lg child">Khuyến mãi </div>
         <div class="border-2 w-full border-red-600 pl-3 rounded pt-12">{!! $sanpham->thong_tin_khuyen_mai !!}</div>
       </div>
-      <div class="flex"> 
-        <button class="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Mua ngay</button>
-        <button class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-          <x-icon.tym></x-icon.tym>
-        </button>
-      </div>
+      <form action="{{ route('trangchu.themvaogiohang', $sanpham->id) }}" method="post">
+        @csrf
+        <div class="flex">
+          <button class="w-full justify-center text-white text-lg bg-red-500 border-0 py-3 px-6 focus:outline-none hover:bg-red-600 rounded">Mua ngay</button>
+        </div>
+      </form>
     </div>
-    <div class="w-1/3 mt-4">
-      <div class=""> Hiện đang có tại showroom: </div>
-      <div class="ml-3 ">
-        <a href="#" class="hover:no-underline dot block "><span>49 Thái Hà – P. Trung Liệt – Q. Đống Đa – Hà Nội</span></a>
-        <a href="#" class="hover:no-underline dot block"><span>151 Lê Thanh Nghị - Hai Bà Trưng - Hà Nội </span></a>
-        <a href="#" class="hover:no-underline dot block"><span>158-160 Lý Thường Kiệt – P.14 – Q. 10 – TP HCM  </span></a>
-        <a href="#" class="hover:no-underline dot block"><span>84T/14 Trần Đình Xu – P. Cô Giang – Q. 1 – TP HCM  </span></a>
-      </div>
-      <div class="mt-4"> Trợ giúp: </div>
-      <div class="ml-3 ">
-        <a href="#" class="hover:no-underline check block text-gray-700"><span>Hướng dẫn đặt hàng Flash Sale</span></a>
-        <a href="#" class="hover:no-underline check block text-gray-700"><span>Hướng dẫn mua hàng</span></a>
-        <a href="#" class="hover:no-underline check block text-gray-700"><span>Chính sách bảo hành đổi trả</span></a>
-        <a href="#" class="hover:no-underline check block text-gray-700"><span>Chính sách mua trả góp</span></a>
-        <a href="#" class="hover:no-underline check block text-gray-700"><span>Chính sách giao hàng</span></a>
-        <a href="#" class="hover:no-underline check block text-gray-700"><span>Chính sách bảo hành tận nhà</span></a>
-        <a href="#" class="hover:no-underline check block text-gray-700"><span>Hỗ trợ khách hàng dự án, doanh nghiệp </span></a>
-      </div>
-    </div>
+    <x-diachi></x-diachi>
   </div>
 </div>
 @endsection

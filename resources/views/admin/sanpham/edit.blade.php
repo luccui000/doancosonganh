@@ -38,7 +38,10 @@
                                 <label class="text-xl text-gray-600">Tên sản phẩm <span class="text-red-500">*</span></label></br>
                                 <input value="{{ $sanpham->ten_sanpham }}" type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="ten_sanpham" value="" required></input>
                             </div>
-                            
+                            <div class="mb-4">
+                                <label class="text-xl text-gray-600">Đường dẫn SEO <span class="text-red-500">*</span></label></br>
+                                <input value="{{ $sanpham->duong_dan_lien_ket }}" type="text" class="border-2 border-gray-300 p-2 w-full rounded-md" name="duong_dan_lien_ket" ></input>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-4">
@@ -74,19 +77,19 @@
                                 <div class="col-md-4">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Giá nhập <span class="text-red-500">*</span></label></br>
-                                        <input value="{{ $sanpham->gia_nhap_vnd }}" type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_nhap" id="gia_nhap" ></input>
+                                        <input value="{{ $sanpham->gia_nhap }}" type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_nhap" id="gia_nhap" ></input>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Giá niêm yết <span class="text-red-500">*</span></label></br>
-                                        <input value="{{ $sanpham->gia_niem_yet_vnd }}" type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_niem_yet" id="gia_niem_yet" ></input>
+                                        <input value="{{ $sanpham->gia_niem_yet }}" type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_niem_yet" id="gia_niem_yet" ></input>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mb-4">
                                         <label class="text-xl text-gray-600">Giá khuyến mãi <span class="text-red-500">*</span></label></br>
-                                        <input value="{{ $sanpham->gia_khuyen_mai_vnd }}" type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_khuyen_mai" id="gia_khuyen_mai"></input>
+                                        <input value="{{ $sanpham->gia_khuyen_mai }}" type="text" step="10000" min="0" max="2000000000" value="0" class="border-2 border-gray-300 p-2 w-full rounded-md" name="gia_khuyen_mai" id="gia_khuyen_mai"></input>
                                     </div>
                                 </div>
                             </div> 
@@ -136,7 +139,7 @@
                                     <option value="1">Lưu và công khai</option>
                                     <option value="0">Lưu tạm thời</option>
                                 </select>
-                                <button role="submit" class="p-2 rounded-tr rounded-br bg-blue-500 text-white hover:bg-blue-400" required>Thêm</button>
+                                <button role="submit" class="p-2 rounded-tr rounded-br bg-blue-500 text-white hover:bg-blue-400" required> Cập nhật</button>
                             </div>
                         </form>
                     </div>
@@ -159,6 +162,11 @@
         var cb = e.originalEvent.clipboardData || window.clipboardData;      
         if(!$.isNumeric(cb.getData('text'))) e.preventDefault();
     });
+    $(document).ready(function() { 
+        $("#gia_nhap").val(formatCurrency($("#gia_nhap").val().replace(/[,]/g,'')));
+        $("#gia_niem_yet").val(formatCurrency($("#gia_niem_yet").val().replace(/[,]/g,'')));
+        $("#gia_khuyen_mai").val(formatCurrency($("#gia_khuyen_mai").val().replace(/[,]/g,''))); 
+    })
     function formatCurrency(number){
         var n = number.split('').reverse().join("");
         var n2 = n.replace(/\d\d\d(?!$)/g, "$&,");    
