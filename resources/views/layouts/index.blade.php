@@ -21,7 +21,7 @@
             right: -25px;
             border-top: 36px solid #4338ca;
             border-right: 25px solid transparent;
-        }
+        } 
     </style>
     @stack('styles') 
 </head>

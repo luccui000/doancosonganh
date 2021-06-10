@@ -50,17 +50,26 @@ class TrangChuController extends Controller
     }
     public function them(Request $request)
     {   
-        $request->validate(KhachHang::VALIDATION_RULES, KhachHang::VALIDATION_MESSAGES);
-        $khachhang = KhachHang::create([
-            'ho_ten' => $request->input('ho_ten'),
-            'email' => $request->input('email'),
-            'dien_thoai' => $request->input('dien_thoai'),
-            'dia_chi' => $request->input('dia_chi'),
-            'trang_thai' => 1
-        ]); 
-        $idsSanPhamDaMua = array_column(Cart::content()->toArray(), 'id');
-        $soluongSanPhamDaMua = array_column(Cart::content()->toArray(), 'qty');
-                  
+        $request->validate(array_merge(KhachHang::VALIDATION_RULES,['dia_chi' => 'required']), 
+                           array_merge(KhachHang::VALIDATION_MESSAGES, ['dia_chi.required' => 'Vui lòng nhập địa chỉ' ]));
+          
+        $khachhangGuard = auth()->guard('khachhangs')->user();
+        dd($khachhangGuard);
+        if($khachhangGuard) {
+            $khachhangGuard->update([
+                'ho_ten' => $request->input('ho_ten'), 
+                'dien_thoai' => $request->input('dien_thoai'),
+                'dia_chi' => $request->input('dia_chi'), 
+            ]);
+        } else {
+            $khachhang = KhachHang::create([
+                'ho_ten' => $request->input('ho_ten'),
+                'email' => $request->input('email'),
+                'dien_thoai' => $request->input('dien_thoai'),
+                'dia_chi' => $request->input('dia_chi'),
+                'trang_thai' => 1
+            ]);
+        }
         $hoadon = HoaDon::create([
             'tong_tien' => str_replace('.', '', Cart::total()),
             'gia_giam' => 0,

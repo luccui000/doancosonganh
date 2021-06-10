@@ -2,6 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
  
+Route::get('dangky', [App\Http\Controllers\XacThucController::class, 'dangkyKhach'])->name('dangkykhach');
+Route::post('dangky', [App\Http\Controllers\XacThucController::class, 'formDangky'])->name('formdangky');
+
+Route::get('dangnhap', [App\Http\Controllers\XacThucController::class, 'dangnhapKhach'])->name('dangnhapkhach');
+Route::post('dangnhap', [App\Http\Controllers\XacThucController::class, 'xacthucKhach'])->name('xacthuckhach');
+
+Route::get('/u', function() {
+    dd(Auth::user());
+});
 Route::group(['as' => 'trangchu.'], function() {
     Route::get('/', [App\Http\Controllers\TrangChuController::class, 'index'])->name('index');
     Route::get('/xemgiohang', [App\Http\Controllers\TrangChuController::class, 'xemgiohang'])->name('xemgiohang');

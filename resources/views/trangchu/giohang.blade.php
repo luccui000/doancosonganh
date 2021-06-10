@@ -64,25 +64,25 @@
                     <div class="flex justify-between">
                       <div class="text-gray-800 pl-2">Họ tên nhận hàng</div>
                       <div class="flex flex-col" > 
-                        <input type="text" name="ho_ten" value="{{ old('ho_ten') }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right " placeholder="VD: Nguyễn Văn A"> 
+                        <input type="text" name="ho_ten" value="{{ auth()->guard('khachhangs')->user()->ho_ten }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right " placeholder="VD: Nguyễn Văn A"> 
                         @error('ho_ten') <div class="mt-1 text-red-500 text-sm text-right">{{ $message }}</div> @enderror
                       </div>
                     </div>
                     <div class="flex justify-between">
                       <div class="text-gray-800 pl-2">Email</div>
-                      <input type="text" name="email" value="{{ old('email') }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="email@gmail.com"> 
+                      <input type="text" name="email" value="{{ auth()->guard('khachhangs')->user()->email }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="email@gmail.com"> 
                     </div>
                     <div class="flex justify-between">
                       <div class="text-gray-800 pl-2">Số điện thoại nhận hàng</div>
                       <div class="flex flex-col" > 
-                        <input type="text" name="dien_thoai" value="{{ old('dien_thoai') }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="039xxxxxxx"> 
+                        <input type="text" name="dien_thoai" value="{{ auth()->guard('khachhangs')->user()->dien_thoai }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="039xxxxxxx"> 
                         @error('dien_thoai') <span class="mt-1 text-red-500 text-sm text-right">{{ $message }}</span> @enderror
                       </div>
                     </div>
                     <div class="flex justify-between">
                       <div class="text-gray-800 pl-2">Địa chỉ nhận hàng</div>
                       <div class="flex flex-col" > 
-                        <input type="text" name="dia_chi" value="{{ old('dia_chi') }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="Tp Trà Vinh"> 
+                        <input type="text" name="dia_chi" value="{{ auth()->guard('khachhangs')->user()->dia_chi }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="Tp Trà Vinh"> 
                         @error('dia_chi') <div class="mt-1 text-red-500 text-sm text-right">{{ $message }}</div> @enderror
                       </div>
                     </div>
