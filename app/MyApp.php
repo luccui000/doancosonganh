@@ -22,4 +22,13 @@ class MyApp {
         '36' => '36 tháng',
         '0' => 'Bảo hành theo từng linh kiện',
     ];
+    const TRANG_THAI_HOA_DON = [
+        '0' => 'Đang chờ xác nhận',
+        '1' => 'Đang giao hàng',
+        '2' => 'Đã thanh toán',
+    ];
+    const HINH_THUC_THANH_TOAN = [
+        '1' => 'Tiền mặt',
+        '2' => 'Chuyển khoản',
+    ];
 }

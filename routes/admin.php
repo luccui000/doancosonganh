@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use App\Http\Controllers\HoaDonController;
 
 Route::get('/', function() { return redirect()->route('admin.dangnhap'); });
 Route::get('/dangnhap', [Controllers\XacThucController::class, 'dangnhap'])->name('admin.dangnhap');
@@ -21,4 +22,8 @@ Route::group(['as' => 'admin.hangsanxuat.', 'prefix' => 'hangsanxuat'], function
     Route::post('/', [Controllers\HangSanXuatController::class, 'store'])->name('store');
     Route::get('/{id}', [Controllers\HangSanXuatController::class, 'edit'])->name('edit');
     Route::put('/{id}/update', [Controllers\HangSanXuatController::class, 'update'])->name('update');
+});
+Route::group(['as' => 'admin.hoadon.', 'prefix' => 'hoadon'], function() {
+    Route::get('/', [Controllers\HoaDonController::class, 'index'])->name('index');
+    Route::get('/{id}}', [Controllers\HoaDonController::class, 'show'])->name('show');
 });

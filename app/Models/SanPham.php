@@ -54,18 +54,11 @@ class SanPham extends Model
     {  
         return url(isset($this->hinhanh[0]) ? $this->hinhanh[0]->duong_dan_hinh_anh : MyApp::UNDEFINE_IMAGE );
     }
-    // public function setMaSanphamAttribute($value)
-    // { 
-    //     $MaDanhMuc = MyApp::MA_LOAI_SAN_PHAM;
-    //     $requestLoaiSanPham = request()->input('loaisanpham_id'); 
-    //     $prefix = $MaDanhMuc[$requestLoaiSanPham  - 1];
-    //     $latestId = $this->latest()->first()->id;
-    //     $this->attributes['ma_sanpham'] = $prefix . str_pad($latestId, 4, '0', STR_PAD_LEFT);
-    // }
-    // public function setDuongDanLienKetAttribute($value)
-    // {
-    //     $this->attributes['duong_dan_lien_ket'] = tieng_viet_khong_dau(request()->input('ten_sanpham')). '_id' . rand(1000, 9999);
-    // }
+    public function hoadon()
+    {
+        return $this->belongsToMany(HoaDon::class, 'CHITIETHOADON', 'sanpham_id', 'hoadon_id')
+                ->withPivot(['so_luong', 'don_gia', 'thanh_tien']);
+    } 
     public const VALIDATION_RULES = [ 
         'ten_sanpham' => 'required|max:255',  
         'chi_tiet_thong_so' => 'required',
