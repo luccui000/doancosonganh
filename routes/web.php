@@ -8,9 +8,6 @@ Route::post('dangky', [App\Http\Controllers\XacThucController::class, 'formDangk
 Route::get('dangnhap', [App\Http\Controllers\XacThucController::class, 'dangnhapKhach'])->name('dangnhapkhach');
 Route::post('dangnhap', [App\Http\Controllers\XacThucController::class, 'xacthucKhach'])->name('xacthuckhach');
 
-Route::get('/u', function() {
-    dd(Auth::user());
-});
 Route::group(['as' => 'trangchu.'], function() {
     Route::get('/', [App\Http\Controllers\TrangChuController::class, 'index'])->name('index');
     Route::get('/xemgiohang', [App\Http\Controllers\TrangChuController::class, 'xemgiohang'])->name('xemgiohang');
@@ -21,4 +18,5 @@ Route::group(['as' => 'trangchu.'], function() {
         Route::post('{id}/xoa', [App\Http\Controllers\TrangChuController::class, 'xoaHangTrongGio'])->name('xoahangtronggio');
         Route::post('them', [App\Http\Controllers\TrangChuController::class, 'them'])->name('them');
     });
+    Route::get('/thanhtoan', );
 });
