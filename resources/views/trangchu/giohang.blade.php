@@ -2,7 +2,7 @@
 @section('content') 
 <div class="container-fluid">   
     <div class="max-w-md mx-auto rounded-lg md:max-w-7xl">
-      <form action="{{ route('trangchu.them') }}" method="post">
+      <form action="{{ route('trangchu.thanhtoan') }}" method="post">
         @csrf
         <div class="col-span-2 p-5"> 
             <table class="w-full text-sm lg:text-base" >
@@ -74,12 +74,12 @@
                     </div>
                     <div class="flex justify-between">
                       <div class="text-gray-800 pl-2">Email</div>
-                      <input type="text" name="email" value="{{ auth()->guard('khachhangs')->user()->email }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="email@gmail.com"> 
+                      <input type="text" name="email" readonly value="{{ auth()->guard('khachhangs')->user()->email }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="email@gmail.com"> 
                     </div>
                     <div class="flex justify-between">
                       <div class="text-gray-800 pl-2">Số điện thoại nhận hàng</div>
                       <div class="flex flex-col" > 
-                        <input type="text" name="dien_thoai" value="{{ auth()->guard('khachhangs')->user()->dien_thoai }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="039xxxxxxx"> 
+                        <input type="text" name="dien_thoai" readonly value="{{ auth()->guard('khachhangs')->user()->dien_thoai }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="039xxxxxxx"> 
                         @error('dien_thoai') <span class="mt-1 text-red-500 text-sm text-right">{{ $message }}</span> @enderror
                       </div>
                     </div>
@@ -105,7 +105,7 @@
                   <div class="flex justify-between">
                     <div class="text-gray-800 pl-2">Họ tên nhận hàng</div>
                     <div class="flex flex-col" > 
-                      <input type="text" name="ho_ten"  class="w-96 p-2 rounded border-2 border-gray-200 text-right " placeholder="VD: Nguyễn Văn A"> 
+                      <input type="text" name="ho_ten" class="w-96 p-2 rounded border-2 border-gray-200 text-right " placeholder="VD: Nguyễn Văn A"> 
                       @error('ho_ten') <div class="mt-1 text-red-500 text-sm text-right">{{ $message }}</div> @enderror
                     </div>
                   </div>
@@ -116,7 +116,7 @@
                   <div class="flex justify-between">
                     <div class="text-gray-800 pl-2">Số điện thoại nhận hàng</div>
                     <div class="flex flex-col" > 
-                      <input type="text" name="dien_thoai" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="039xxxxxxx"> 
+                      <input type="text" name="dien_thoai"  class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="039xxxxxxx"> 
                       @error('dien_thoai') <span class="mt-1 text-red-500 text-sm text-right">{{ $message }}</span> @enderror
                     </div>
                   </div>
@@ -162,11 +162,25 @@
                           <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
                             @php echo Cart::total(); @endphp₫ 
                           </div>
-                        </div> 
-                        <button type="submit"class="flex justify-center w-full px-10 py-2 mt-6 font-medium text-white uppercase bg-indigo-600 rounded shadow item-center hover:bg-indigo-500 focus:shadow-outline focus:outline-none">
+                        </div>  
+                        <div class="mt-2 space-y-2"> 
+                          <div class="form-check">
+                            <input class="form-check-input w-6 h-6" type="radio" name="thanhtoan" id="thanhtoan1" value="1" checked>
+                            <label class="form-check-label text-lg ml-4 pt-1" for="thanhtoan1">
+                              Thanh toán khi nhận hàng
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input w-6 h-6" type="radio" name="thanhtoan" value="0" id="thanhtoan2" >
+                            <label class="form-check-label text-lg ml-4 pt-1" for="thanhtoan2">
+                              Thanh toán online
+                            </label>
+                          </div>
+                        </div>
+                        <button type="submit" class="flex justify-center space-x-2 w-full px-10 py-2 mt-6 font-medium text-white uppercase bg-indigo-600 rounded shadow item-center hover:bg-indigo-500 focus:shadow-outline focus:outline-none"> 
                           <svg class="w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"/></svg>
-                          <span class="ml-2 mt-5px">Tiến hành đặt hàng</span>
-                        </button> 
+                          <span class="pt-1">Tiến hành đặt hàng</span>
+                        </button>   
                   </div>
                 </div>
               </div>
@@ -174,4 +188,5 @@
       </form>
     </div>    
 </div>
+<x-footer></x-footer>
 @endsection
