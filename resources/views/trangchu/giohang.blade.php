@@ -55,8 +55,12 @@
                   @endforeach
                 </tbody>
             </table> 
+            @if(Cart::content()->count() === 0)
+              <div class="text-center">Chưa có sản phẩm nào trong giỏ hàng</div>
+            @endif
             <div class="my-4 mt-6 -mx-2 lg:flex text-md">
-                <div class="lg:px-2 lg:w-1/2"> 
+              @if(auth()->guard('khachhangs')->user())
+              <div class="lg:px-2 lg:w-1/2"> 
                   <div class="p-2 bg-gray-100 rounded text-lg">
                     Thông tin nhận hàng
                   </div> 
@@ -64,7 +68,7 @@
                     <div class="flex justify-between">
                       <div class="text-gray-800 pl-2">Họ tên nhận hàng</div>
                       <div class="flex flex-col" > 
-                        <input type="text" name="ho_ten" value="{{ auth()->guard('khachhangs')->user()->ho_ten }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right " placeholder="VD: Nguyễn Văn A"> 
+                        <input type="text" name="ho_ten"  value="{{ auth()->guard('khachhangs')->user()->ho_ten }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right " placeholder="VD: Nguyễn Văn A"> 
                         @error('ho_ten') <div class="mt-1 text-red-500 text-sm text-right">{{ $message }}</div> @enderror
                       </div>
                     </div>
@@ -92,6 +96,44 @@
                     </div>
                   </div> 
                 </div>
+              @else 
+              <div class="lg:px-2 lg:w-1/2"> 
+                <div class="p-2 bg-gray-100 rounded text-lg">
+                  Thông tin nhận hàng
+                </div> 
+                <div class="pt-4 space-y-2">
+                  <div class="flex justify-between">
+                    <div class="text-gray-800 pl-2">Họ tên nhận hàng</div>
+                    <div class="flex flex-col" > 
+                      <input type="text" name="ho_ten"  class="w-96 p-2 rounded border-2 border-gray-200 text-right " placeholder="VD: Nguyễn Văn A"> 
+                      @error('ho_ten') <div class="mt-1 text-red-500 text-sm text-right">{{ $message }}</div> @enderror
+                    </div>
+                  </div>
+                  <div class="flex justify-between">
+                    <div class="text-gray-800 pl-2">Email</div>
+                    <input type="text" name="email" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="email@gmail.com"> 
+                  </div>
+                  <div class="flex justify-between">
+                    <div class="text-gray-800 pl-2">Số điện thoại nhận hàng</div>
+                    <div class="flex flex-col" > 
+                      <input type="text" name="dien_thoai" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="039xxxxxxx"> 
+                      @error('dien_thoai') <span class="mt-1 text-red-500 text-sm text-right">{{ $message }}</span> @enderror
+                    </div>
+                  </div>
+                  <div class="flex justify-between">
+                    <div class="text-gray-800 pl-2">Địa chỉ nhận hàng</div>
+                    <div class="flex flex-col" > 
+                      <input type="text" name="dia_chi" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="Tp Trà Vinh"> 
+                      @error('dia_chi') <div class="mt-1 text-red-500 text-sm text-right">{{ $message }}</div> @enderror
+                    </div>
+                  </div>
+                  <div class="flex justify-between">
+                    <div class="text-gray-800 pl-2">Ghi chú</div>
+                    <textarea type="text" name="ghi_chu" class="w-96 p-2 rounded border-2 border-gray-200 " placeholder="Tp Trà Vinh"> </textarea>
+                  </div>
+                </div> 
+              </div>
+              @endif
                 <div class="lg:px-2 lg:w-1/2">
                   <div class="p-2 bg-gray-100 rounded text-lg text-right">
                     Chi tiết đặt hàng

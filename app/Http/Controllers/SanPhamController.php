@@ -95,7 +95,8 @@ class SanPhamController extends Controller
 
         // $request->validate(SanPham::VALIDATION_RULES, SanPham::VALIDATION_MESSAGES);
         
-        $sanpham = SanPham::where('id', $id)->update([
+        $sanpham = SanPham::findOrFail($id);
+        $sanpham->update([
             'ten_sanpham' => $request->input('ten_sanpham'),  
             'duong_dan_lien_ket' => $request->input('duong_dan_lien_ket'),  
             'chi_tiet_thong_so' => $request->input('chi_tiet_thong_so'),
@@ -113,17 +114,17 @@ class SanPhamController extends Controller
         if($request->hasFile('hinhanh')) 
         {
             foreach($request->file('hinhanh') as $file)
-            {  
+            {   
                 $tenSanPham = tieng_viet_khong_dau($request->input('ten_sanpham'));
                 $extension = $file->getClientOriginalExtension(); 
                 $fileNameToStore = date('dmy_hms').'_'.$tenSanPham. '_'.rand(1000, 9999).'.'.$extension; 
                 $file->storeAs('public', $fileNameToStore );
-                $idHinhAnh = HinhAnh::insertGetId([
+                $hinhanh = HinhAnh::create([
                     'duong_dan_hinh_anh' => 'storage/' . $fileNameToStore,
                     'created_at' => now(),
                     'updated_at' => now()
                 ]);
-                $sanpham->hinhanh()->attach($idHinhAnh);
+                $sanpham->hinhanh()->attach($hinhanh->id);
             } 
         }  
         // SanPham

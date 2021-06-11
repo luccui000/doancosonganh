@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Index</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet"> 
     <style>
@@ -87,16 +88,20 @@
                     <li class="nav-item">
                         <div class="nav-link w-44 text-sm "  href="#">
                             <div class="flex">
-                                <div class="w-10 pt-1 bg-white rounded-full">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-900 ml-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <div class="w-10"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 26 26" >
+                                        <path style="fill: #ffffff;" d="M 13 0 C 5.8321429 0 0 5.8321429 0 13 C 0 20.167857 5.8321429 26 13 26 C 20.167857 26 26 20.167857 26 13 C 26 5.8321429 20.167857 0 13 0 z M 13 2 C 19.086977 2 24 6.9130231 24 13 C 24 15.861182 22.907709 18.452155 21.125 20.40625 C 20.373755 19.027539 18.16875 17.89375 15.8125 17.40625 C 15.8125 17.40625 14.6875 17.1 15.1875 16 C 15.8875 15.1 16.3125 14.1125 16.3125 13.8125 C 16.3125 13.8125 17.30625 13.0125 17.40625 11.8125 C 17.50625 10.7125 17.1875 10.59375 17.1875 10.59375 C 17.5875 9.29375 17.69375 4.4 14.59375 5 C 14.09375 4 10.8125 3.20625 9.3125 5.90625 C 8.6125 7.20625 8.3 9.1 9 10.5 C 9 10.6 8.7875 10.39375 8.6875 11.09375 C 8.6875 11.79375 9.0125 12.7875 9.3125 13.1875 C 9.4125 13.3875 9.6125 13.49375 9.8125 13.59375 C 9.8125 13.59375 10.00625 14.80625 10.90625 15.90625 C 11.10625 16.80625 10.1875 17.3125 10.1875 17.3125 C 7.75 17.8 5.5353516 18.933789 4.78125 20.3125 C 3.0509759 18.369796 2 15.81371 2 13 C 2 6.9130231 6.9130231 2 13 2 z"/>
                                     </svg> 
                                 </div>
-                                <div class="text-white ml-2">
-                                    <div class="flex flex-col-reverse">
-                                        <a href="#" class="text-sm cursor-pointer text-white hover:text-green-400 hover:no-underline">Đăng ký</a>
-                                        <a href="#" class="text-sm cursor-pointer text-white hover:no-underline ">Đăng nhập</a>
-                                    </div>
+                                <div class="text-white ml-2 cursor-pointer">
+                                    @if(auth()->guard('khachhangs')->user())
+                                        <div class="pt-2 mt-1">{{ auth()->guard('khachhangs')->user()->ho_ten }}</div>
+                                    @else
+                                        <div class="flex flex-col-reverse">
+                                            <a href="{{ route('dangkykhach') }}" class="text-sm cursor-pointer text-white hover:text-green-400 hover:no-underline">Đăng ký</a>
+                                            <a href="{{ route('dangnhapkhach') }}" class="text-sm cursor-pointer text-white hover:no-underline ">Đăng nhập</a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div> 
