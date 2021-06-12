@@ -79,7 +79,7 @@
                     <div class="flex justify-between">
                       <div class="text-gray-800 pl-2">Số điện thoại nhận hàng</div>
                       <div class="flex flex-col" > 
-                        <input type="text" name="dien_thoai" readonly value="{{ auth()->guard('khachhangs')->user()->dien_thoai }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="039xxxxxxx"> 
+                        <input type="text" name="dien_thoai" value="{{ auth()->guard('khachhangs')->user()->dien_thoai }}" class="w-96 p-2 rounded border-2 border-gray-200 text-right" placeholder="039xxxxxxx"> 
                         @error('dien_thoai') <span class="mt-1 text-red-500 text-sm text-right">{{ $message }}</span> @enderror
                       </div>
                     </div>

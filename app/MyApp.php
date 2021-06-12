@@ -30,6 +30,7 @@ class MyApp {
     const HINH_THUC_THANH_TOAN = [
         '1' => 'Tiền mặt',
         '2' => 'Chuyển khoản',
+        '3' => 'Đã chuyển khoản',
     ];
     const LOAI_XAC_THUC = ['facebook', 'google'];
 }

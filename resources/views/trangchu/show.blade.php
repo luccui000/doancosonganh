@@ -70,14 +70,19 @@
         <div class="absolute bg-red-600 w-32 h-10 top-2 -left-4 z-10 p-2 text-white font-bold text-lg child">Khuyến mãi </div>
         <div class="border-2 w-full border-red-600 pl-3 rounded pt-12">{!! $sanpham->thong_tin_khuyen_mai !!}</div>
       </div>
-      <form action="{{ route('trangchu.themvaogiohang', $sanpham->id) }}" method="post">
-        @csrf
-        <div class="flex">
-          <button class="w-full justify-center text-white text-lg bg-red-500 border-0 py-3 px-6 focus:outline-none hover:bg-red-600 rounded">Mua ngay</button>
-        </div>
-      </form>
+      <div class="flex justify-between space-x-2">
+        <form action="{{ route('trangchu.themvaogiohang', [ $sanpham->id, 'action' => 0]) }}" method="post">
+          @csrf
+          <button class="w-72 justify-center text-white text-lg bg-green-500 border-0 py-3 px-6 focus:outline-none hover:bg-green-600 rounded">Mua ngay</button>
+        </form>
+        <form action="{{ route('trangchu.themvaogiohang', [$sanpham->id, 'action' => 1]) }}" method="post">
+          @csrf 
+          <button class="w-72 justify-center text-white text-lg bg-red-500 border-0 py-3 px-6 focus:outline-none hover:bg-red-600 rounded">Thêm vào giỏ hàng</button>
+        </form>
+      </div> 
     </div>
     <x-diachi></x-diachi>
   </div>
 </div>
+<x-footer></x-footer>
 @endsection

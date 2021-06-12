@@ -23,5 +23,5 @@ Route::group(['as' => 'admin.hangsanxuat.', 'prefix' => 'hangsanxuat'], function
 });
 Route::group(['as' => 'admin.hoadon.', 'prefix' => 'hoadon'], function() {
     Route::get('/', [Controllers\HoaDonController::class, 'index'])->name('index');
-    Route::get('/{id}}', [Controllers\HoaDonController::class, 'show'])->name('show');
+    Route::get('/{id}', [Controllers\HoaDonController::class, 'show'])->name('show');
 });

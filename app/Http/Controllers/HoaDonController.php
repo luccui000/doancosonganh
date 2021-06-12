@@ -17,7 +17,7 @@ class HoaDonController extends Controller
     public function show($id)
     {
         return view('admin.hoadon.show', [
-            'hoadon' => HoaDon::findOrFail($id)
+            'hoadon' => HoaDon::where('id', $id)->with(['sanpham'])->get()
         ]);
     }
 }

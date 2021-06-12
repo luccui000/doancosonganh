@@ -34,6 +34,9 @@ class TrangChuController extends Controller
             'duong_dan_lien_ket' => $sanpham->duong_dan_lien_ket,
         ])->associate('App\Models\SanPham'); 
         session()->flash('thanhcong', 'Đã thêm vào giỏ hàng');
+        if(request()->query('action') == "0") {
+            return redirect()->route('trangchu.xemgiohang');
+        }
         return redirect()->back();
     }
     public function xoaHangTrongGio(Request $request, $rowId)
@@ -57,16 +60,28 @@ class TrangChuController extends Controller
         $khachhang = auth()->guard('khachhangs')->user(); 
         
         if($khachhang) {
-            $request->validate([
+            $validateRules = [
                 'ho_ten' => 'required',
-                'dia_chi' => 'required'
-            ], [
+                'dia_chi' => 'required',
+            ];
+            $validateMessage = [
                 'ho_ten.required' => 'Vui lòng nhập họ tên. ',
-                'dia_chi.required' => 'Vui lòng nhập địa chỉ.'
-            ]);
+                'dia_chi.required' => 'Vui lòng nhập địa chỉ.',
+            ];
+            if(!$khachhang->dien_thoai) {
+                array_merge($validateRules, [
+                    'dien_thoai' => 'required|unique:KHACHHANG'
+                ]);
+                array_merge($validateMessage, [
+                    'dien_thoai.required' => 'Vui lòng nhập số điện thoại.',
+                    'dien_thoai.unique' => 'Số điện thoại này đã được sử dụng.',
+                ]);
+            } 
+            $request->validate($validateRules, $validateMessage);
             $khachhang->update([
                 'ho_ten' => $request->input('ho_ten'),  
                 'dia_chi' => $request->input('dia_chi'), 
+                'dien_thoai' => $request->input('dien_thoai'), 
             ]);
         } else {
             $request->validate(array_merge(KhachHang::VALIDATION_RULES,['dia_chi' => 'required']), 
@@ -98,6 +113,9 @@ class TrangChuController extends Controller
                     'don_gia' => $sanpham->price,
                     'thanh_tien' => $sanpham->total,
                 ]);
+                $sp = SanPham::where('id', $sanpham->id)->first();
+                $soLuongTonKho = $sp->so_luong_ton_kho;
+                $sp->update(['so_luong_ton_kho' => $soLuongTonKho - $sanpham->qty]);
             } 
             Cart::destroy();
             return redirect()->route('trangchu.index');
@@ -115,7 +133,7 @@ class TrangChuController extends Controller
                     'tong_tien' => str_replace('.', '', Cart::total()),
                     'gia_giam' => 0,
                     'tong_thanh_toan' => str_replace('.', '', Cart::total()),
-                    'hinh_thuc_thanh_toan' => 1,
+                    'hinh_thuc_thanh_toan' => 2,
                     'ghi_chu' => $request->input('ghi_chu'),
                     'ma_giao_dich' => '',
                     'trang_thai' => 0,

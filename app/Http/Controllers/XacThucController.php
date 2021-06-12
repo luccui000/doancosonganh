@@ -79,7 +79,7 @@ class XacThucController extends Controller
     }
     public function handleProviderCallback($provider)
     { 
-        $user = Socialite::driver($provider)->user(); 
+        $user = Socialite::driver($provider)->stateless()->user(); 
         $khachhang = KhachHang::where('mangxahoi_id', $user->id)->first();   
         if(!$khachhang)  {
             $khachhang = KhachHang::create([
