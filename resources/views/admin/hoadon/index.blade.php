@@ -10,7 +10,7 @@
         </a>
     </header>
     <div class="p-3">
-        <div x-data="{ openTab: 1 }"  data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t" data-tabs-index="2">
+        <div x-data="{ openTab: 0 }"  data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t" data-tabs-index="2">
             <ul class="flex border-b mb-0">
                 @foreach (MyApp::TRANG_THAI_HOA_DON as $index => $trangthai)
                     <li @click="openTab = {{ $index  }}" class="-mb-px mr-1">

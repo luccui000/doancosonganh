@@ -31,4 +31,5 @@ class MyApp {
         '1' => 'Tiền mặt',
         '2' => 'Chuyển khoản',
     ];
+    const LOAI_XAC_THUC = ['facebook', 'google'];
 }

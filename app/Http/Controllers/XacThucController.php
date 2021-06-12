@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KhachHang;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Models\KhachHang; 
+use Illuminate\Http\Request; 
+use Illuminate\Support\Facades\Hash; 
+use Socialite, URL; 
 
 class XacThucController extends Controller
 {
@@ -68,5 +68,30 @@ class XacThucController extends Controller
             return redirect()->route('dangnhapkhach')->withErrors('mat_khau', 'Mật khẩu không đúng. ');
         }
     }
-
+    public function redirectToProvider($provider)
+    {  
+        if(!session()->has('pre_url')){
+            session()->put('pre_url', URL::previous());
+        }else{
+            if(URL::previous() != URL::to('login')) session()->put('pre_url', URL::previous());
+        }  
+        return Socialite::driver($provider)->redirect();   
+    }
+    public function handleProviderCallback($provider)
+    { 
+        $user = Socialite::driver($provider)->user(); 
+        $khachhang = KhachHang::where('mangxahoi_id', $user->id)->first();   
+        if(!$khachhang)  {
+            $khachhang = KhachHang::create([
+                'ho_ten' => $user->name,
+                'email' => $user->email, 
+                'mangxahoi' => $provider,
+                'mangxahoi_id' => $user->id,
+                'trang_thai' => 1
+            ]); 
+        }
+        auth()->guard('khachhangs')->login($khachhang);
+        
+        return redirect()->route('trangchu.index');
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\XacThucController;
 use Illuminate\Support\Facades\Route;
  
 Route::get('dangky', [App\Http\Controllers\XacThucController::class, 'dangkyKhach'])->name('dangkykhach');
@@ -10,7 +11,12 @@ Route::post('dangnhap', [App\Http\Controllers\XacThucController::class, 'xacthuc
 
 Route::get('/vnpay', [App\Http\Controllers\ThanhToanController::class, 'vnpay'])->name('vnpay');
 Route::get('/returnVnpay', [App\Http\Controllers\TrangChuController::class, 'returnVnpay'])->name('returnVnpay');
-
+ 
+Route::get('/dangnhap/{provider}', [App\Http\Controllers\XacThucController::class, 'redirectToProvider'])
+    ->name('dangnhap.mangxahoi');
+Route::get('/{provider}/callback', [App\Http\Controllers\XacThucController::class, 'handleProviderCallback'])
+    ->name('dangnhap.callback');
+    
 Route::group(['as' => 'trangchu.'], function() {
     Route::get('/', [App\Http\Controllers\TrangChuController::class, 'index'])->name('index');
     Route::get('/xemgiohang', [App\Http\Controllers\TrangChuController::class, 'xemgiohang'])->name('xemgiohang');
