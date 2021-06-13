@@ -28,9 +28,8 @@ class MyApp {
         '2' => 'Đã thanh toán',
     ];
     const HINH_THUC_THANH_TOAN = [
-        '1' => 'Tiền mặt',
-        '2' => 'Chuyển khoản',
-        '3' => 'Đã chuyển khoản',
+        '1' => 'Thanh toán khi nhận hàng', 
+        '2' => 'Đã chuyển khoản',
     ];
     const LOAI_XAC_THUC = ['facebook', 'google'];
 }

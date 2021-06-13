@@ -10,11 +10,11 @@
         </a>
     </header>
     <div class="p-3">
-        <div x-data="{ openTab: 0 }"  data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t" data-tabs-index="2">
+        <div x-data="{ openTab: {{ request()->query('trang_thai') ?? 0 }} }"  data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t" data-tabs-index="2">
             <ul class="flex border-b mb-0">
                 @foreach (MyApp::TRANG_THAI_HOA_DON as $index => $trangthai)
                     <li @click="openTab = {{ $index  }}" class="-mb-px mr-1">
-                        <a x-bind:class="{ 'bg-gray-50 text-green-500': openTab === {{ $index }} }" class="cursor-pointer inline-block border-l border-t border-r rounded-t py-2 px-4 text-gray-500 font-semibold hover:text-green-500 hover:no-underline">{{ $trangthai }}</a>
+                        <a x-bind:class="{ 'bg-gray-50 text-green-500 border-t-2 ': openTab === {{ $index }} }" class="cursor-pointer inline-block border-l border-t border-r rounded-t py-2 px-4 text-gray-500 font-semibold hover:text-green-500 hover:no-underline">{{ $trangthai }}</a>
                     </li>   
                 @endforeach
             </ul> 
@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-sm font-medium divide-y divide-gray-100">    
-                    @foreach ($hoadons as $hoadon) 
+                    @foreach ($hoadons as $hoadon)  
                         <tr x-show="openTab === {{ $hoadon->trang_thai }}" > 
                             <td class="p-2"><div class="cursor-pointer text-center">{{ $hoadon->id }}</div></td> 
                             <td class="p-2"><div style="max-width: 300px;" class="text-center text-truncate" title="{{ $hoadon->created_at }}">{{ $hoadon->created_at->format('d/m/y') }}</div></td> 
@@ -43,16 +43,20 @@
                             <td class="p-2 text-center font-bold">{{ money_format('%.0n', $hoadon->tong_tien) }}</td>  
                             <td class="p-2 text-center font-bold text-lg text-green-500">{{ money_format('%.0n', $hoadon->tong_thanh_toan) }}</td>  
                             <td class="p-2 text-center">{{ MyApp::HINH_THUC_THANH_TOAN[$hoadon->hinh_thuc_thanh_toan] ?? '' }}</td>  
-                            <td class="p-2 text-center">{{ $hoadon->ghi_chu !== "" ? $hoadon->ghi_chu : 'không có' }}</td>  
+                            <td class="p-2 text-center">{{ $hoadon->ghi_chu !== "" ? $hoadon->ghi_chu : 'không có' }}</td>
+                            @if($hoadon->trang_thai === "1")  
+                            <td style="width: 100px;">
+                                <form action="{{ route('admin.hoadon.update', [$hoadon->id, 'trang_thai' => 2])  }}" method="POST">
+                                    @csrf @method('PUT')
+                                    <button type="submit" class="mr-2 transform hover:text-green-500 text-gray-600 hover:scale-110">
+                                        Xác nhận
+                                    </button>
+                                </form>
+                            </td>
+                            @else
                             <td style="width: 100px">
-                                <div class="flex item-center justify-center">
+                                <div class="flex item-center justify-center"> 
                                     <a href="{{ route('admin.hoadon.show', $hoadon->id) }}" class="w-4 mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                        </svg>
-                                    </a>
-                                    <a href="{{ route('admin.sanpham.edit', $hoadon->id) }}" class="w-4 mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                         </svg>
@@ -68,6 +72,7 @@
                                     </form>
                                 </div>
                             </td>
+                            @endif  
                         </tr>
                     @endforeach
                 </tbody>

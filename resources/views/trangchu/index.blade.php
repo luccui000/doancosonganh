@@ -1,7 +1,7 @@
 @extends('layouts.index')
 @section('content')
     <div class=" bg-gray-50 flex space-x-1 pb-3"> 
-        <x-danhmuc></x-danhmuc>  
+        <x-danhmuc :sanphams="$sanphams"></x-danhmuc>  
         <x-banner></x-banner> 
     </div> 
     <x-trangchu.sanphambanchay :sanphams="$sanphams"></x-trangchu.sanphambanchay>

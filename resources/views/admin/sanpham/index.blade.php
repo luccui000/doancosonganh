@@ -26,6 +26,7 @@
                             <th class="pt-3 pb-3"><div class="font-semibold text-center">Hình ảnh</div></th>
                             <th class="pt-3 pb-3"><div class="font-semibold text-center">Tên sản phẩm</div></th>
                             <th class="pt-3 pb-3"><div class="font-semibold text-center truncate">Đường dẫn liên kết</div></th>
+                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Số lượng tồn</div></th> 
                             <th class="pt-3 pb-3"><div class="font-semibold text-center">Hãng sản xuất</div></th> 
                             <th class="pt-3 pb-3"><div class="font-semibold text-center">Thông tin khuyến mãi</div></th>
                             <th class="pt-3 pb-3"><div class="font-semibold text-center">Bảo hành</div></th>
@@ -46,6 +47,7 @@
                                 </td>
                                 <td class="p-2"><div style="max-width: 300px;" class="text-center text-truncate" title="{{ $sanpham->ten_sanpham }}">{{ $sanpham->ten_sanpham }}</div></td> 
                                 <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate"  title="{{ $sanpham->duong_dan_lien_ket }}">{{ $sanpham->duong_dan_lien_ket }}</div></td> 
+                                <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate"  ">{{ $sanpham->so_luong_ton_kho }}</div></td> 
                                 <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->hangsanxuat->ten_hang }}">{{ $sanpham->hangsanxuat->ten_hang }}</div></td>  
                                 <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->thong_tin_khuyen_mai }}">{{ $sanpham->thong_tin_khuyen_mai }}</div></td> 
                                 <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ App\MyApp::THONG_TIN_BAO_HANH[$sanpham->bao_hanh] }}">{{ App\MyApp::THONG_TIN_BAO_HANH[$sanpham->bao_hanh] }}</div></td> 

@@ -95,11 +95,14 @@
                     <textarea class="p-2 border-4 border-gray-200 rounded-md " name="MoTa" cols="45" rows="5" placeholder="Mô tả... "></textarea>                     
                 </div>
               </div> 
-              <div class="flex justify-center space-x-2 mt-4">
-                <a href="" class="p-2 bg-gray-100 rounded text-gray-700 hover:bg-gray-200 w-1/3 text-center hover:no-underline">Hủy</a>
-                <a href="" class="p-2 bg-green-600 hover:bg-green-500 text-white rounded  w-1/3 text-center hover:no-underline">Xác nhận</a>
-                <a href="" class="p-2 bg-blue-600 hover:bg-blue-500 rounded  text-white w-1/3 text-center hover:no-underline">In phiếu</a>
-              </div>
+              <form action="{{ route('admin.hoadon.update', [$hoadon[0]->id, 'trang_thai' => 1])  }}" method="post">
+                @csrf @method('PUT')
+                <div class="flex justify-center space-x-2 mt-4">
+                  <a href="" class="p-2 bg-gray-100 rounded text-gray-700 hover:bg-gray-200 w-1/3 text-center hover:no-underline">Hủy</a>
+                  <button href="" class="p-2 bg-green-600 hover:bg-green-500 text-white rounded  w-1/3 text-center hover:no-underline">Xác nhận</button>
+                  <a href="" class="p-2 bg-blue-600 hover:bg-blue-500 rounded  text-white w-1/3 text-center hover:no-underline">In phiếu</a>
+                </div>
+              </form>
             </div> 
         </div>
 
