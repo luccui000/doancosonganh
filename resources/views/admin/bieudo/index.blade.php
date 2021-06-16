@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4 p-2"> 
+
+<div class="grid gap-6 mb-6 md:grid-cols-2 xl:grid-cols-4 pl-2 pr-2"> 
     <div class="flex items-center p-2 bg-white rounded-lg shadow-xs dark:bg-gray-800">
       <div class="p-3 mr-4 text-orange-500 bg-red-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -12,7 +13,7 @@
           Tổng số khách hàng
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          6389
+          {{ App\Models\KhachHang::all()->count() }}
         </p>
       </div>
     </div> 
@@ -27,7 +28,7 @@
           Tổng doanh thu
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          $ 46,760.89
+          {{ money_format('%.0n', App\Models\HoaDon::where('trang_thai', 2)->sum('tong_thanh_toan')) }}
         </p>
       </div>
     </div>
@@ -43,7 +44,7 @@
           Tổng đơn hàng mới
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          376
+          {{ App\Models\HoaDon::where('trang_thai', 1)->count() }}
         </p>
       </div>
     </div>
@@ -59,13 +60,134 @@
           Tống số sản phẩm
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          35
+          {{ App\Models\SanPham::count() }}
         </p>
       </div>
     </div>
   </div>
-<div id="pop_div" class="w-1/3 p-2"></div> 
-<?= $lava->render('ColumnChart', 'Finances', 'pop_div') ?>
+  <div class="pl-2 pr-2">
+    <h3 class="pb-2">Danh sách hoá đơn mới</h3>
+    <table class="w-full whitespace-no-wrap">
+      <thead>
+        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+          <th class="px-4 py-3">#</th>
+          <th class="px-4 py-3">Ngày giao dịch</th>
+          <th class="px-4 py-3">Mã ngân hàng</th>
+          <th class="px-4 py-3">Mã giao dịch</th>
+          <th class="px-4 py-3">Khách hàng</th>
+          <th class="px-4 py-3">Mã hóa đơn</th>
+          <th class="px-4 py-3">Loại thẻ</th> 
+          <th class="text-center px-4 py-3">Mã giao dịch VNPAY</th>
+          <th class="px-4 py-3"></th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y dark:bg-gray-800">
+        @foreach ($giaodichs as $giaodich)
+            <tr class="text-gray-700 ">
+                <td class="px-4 py-1 text-sm">
+                    {{ $giaodich->id }}
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    {{ $giaodich->created_at->format('d/m/Y') }}
+                </td>
+                <td class="px-4 py-3 text-xs">
+                    <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">
+                    {{ $giaodich->vnp_ma_ngan_hang }}
+                    </span>
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    {{ $giaodich->vnp_ma_giao_dich_ngan_hang }}
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    {{ $giaodich->khachhang->ho_ten }}
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    {{ $giaodich->hoadon->id }}
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    {{ $giaodich->vnp_loai_the }}
+                </td>
+                <td class="text-center px-4 py-3 text-sm">
+                    {{ $giaodich->vnp_ma_giao_dich_vnpay }}
+                </td>
+                <td class="text-center w-10">
+                    <a class="w-4 h mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </td>
+            </tr>  
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+  <div class="pl-2 pr-2 mt-4">
+    <h3 class="pb-2">Danh sách khách hàng mới</h3>
+    <table class="w-full whitespace-no-wrap">
+      <thead>
+        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+          <th class="px-4 py-3">#</th>
+          <th class="px-4 py-3">Ngày đăng ký</th>
+          <th class="px-4 py-3">Họ tên KH</th>
+          <th class="px-4 py-3">Email</th>
+          <th class="px-4 py-3">Số điện thoại</th>
+          <th class="px-4 py-3">Đăng ký bằng</th>  
+          <th class="px-4 py-3"></th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y dark:bg-gray-800">
+        @foreach ($khachhangs as $khachhang)
+            <tr class="text-gray-700 ">
+                <td class="px-4 py-1 text-sm">
+                    {{ $loop->iteration }}
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    {{ $khachhang->created_at->format('d/m/Y') }}
+                </td>
+                <td class="px-4 py-3 text-xs">
+                  {{ $khachhang->ho_ten }} 
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    {{ $khachhang->email }}
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    {{ $khachhang->dien_thoai }}
+                </td> 
+                <td class="px-4 py-3 text-sm">
+                  @if($khachhang->mangxahoi == "facebook")
+                  <span class="px-2 py-1 font-semibold leading-tight text-blue-700 bg-blue-100 rounded-full">
+                      {{ $khachhang->mangxahoi  }}
+                  </span>
+                  @endif
+                  @if($khachhang->mangxahoi == "google")
+                  <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full">
+                    {{ $khachhang->mangxahoi  }}
+                  </span>
+                  @endif
+                </td> 
+                <td class="text-center w-10">
+                    <a class="w-4 h mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </td>
+            </tr>  
+        @endforeach
+      </tbody>
+    </table>
+  </div>
+  <div class="pt-2 pl-2 pr-2 mt-6">
+    <h3>Biểu đồ thống kê</h3>
+    <div class="flex h-96 space-x-2">
+      <div id="pop_div" class="w-2/4 rounded"></div> 
+      <div id="temps_div" class="w-2/4"> </div>
+    </div>
+    <div id="line_chart" class="w-full">
+
+    </div>
+  </div>  
+  <?= $lava->render('DonutChart', 'IMDB', 'pop_div') ?> 
+  <?= $lava->render('LineChart', 'Temps', 'temps_div') ?>
+  <?= $lava->render('AreaChart', 'Population', 'line_chart') ?>
+
 @endsection
 @push('scripts')
     <script>

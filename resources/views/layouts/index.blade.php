@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Index</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet"> 
@@ -24,8 +24,8 @@
             border-right: 25px solid transparent;
         } 
     </style>
-    @stack('styles') 
-    <script src="https://unpkg.com/@popperjs/core@2" defer></script>
+    @livewireStyles
+    @stack('styles')  
 </head>
 <body>    
     <nav class="navbar navbar-expand-lg p-0 text-white bg-indigo-700" style="background-color: rgba(67, 56, 202,1)">
@@ -55,10 +55,7 @@
                 Computer
             </a> 
             <div class="relative w-1/2">
-                <input
-                    class="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded-full shadow"
-                    placeholder="Tìm kiếm..."
-                /> 
+                @livewire('search-drop-down')
                 <button class="absolute right-0 bottom-2 mt-5 mr-3">
                     <svg class="text-gray-800 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
                       xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
@@ -96,7 +93,16 @@
                                 </div>
                                 <div class="text-white ml-2 cursor-pointer">
                                     @if(auth()->guard('khachhangs')->user())
-                                        <div class="pt-2 mt-1">{{ auth()->guard('khachhangs')->user()->ho_ten }}</div>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ auth()->guard('khachhangs')->user()->ho_ten }}
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                            </ul>
+                                        </div> 
                                     @else
                                         <div class="flex flex-col-reverse">
                                             <a href="{{ route('dangkykhach') }}" class="text-sm cursor-pointer text-white hover:text-green-400 hover:no-underline">Đăng ký</a>
@@ -149,9 +155,10 @@
           </div>
         </div>
     </div>
+    @livewireScripts
+    <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     @stack('scripts')
 </body>
