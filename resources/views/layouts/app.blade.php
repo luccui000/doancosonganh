@@ -7,20 +7,150 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">  
     <style> 
         body {
             font-family: 'Roboto', sans-serif;
         }  
     </style>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" ></script> 
     <title>Admin Pages</title>
     @stack('styles')
 </head>
 <body>  
-    <div>
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-        
+    <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }" >
+      <!-- Desktop sidebar -->
+      <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0" >
+        <div class="py-4 text-gray-500 dark:text-gray-400">
+          <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#" >Shop MT </a>
+          <ul class="mt-6">
+            <li class="relative px-6 py-3">
+              <span
+                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
+              <a class="inline-flex hover:no-underline items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                href="{{ route('admin.sanpham.index') }}" > 
+                <span class="ml-4">Trang chủ</span>
+              </a>
+            </li>
+          </ul>
+          <ul>
+            <li class="relative px-6 py-3">
+              <a
+                class="inline-flex hover:no-underline items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="forms.html"
+              > 
+                <span class="ml-4">Forms</span>
+              </a>
+            </li>
+            <li class="relative px-6 py-3">
+              <a
+                class="inline-flex hover:no-underline items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="cards.html"
+              > 
+                <span class="ml-4">Cards</span>
+              </a>
+            </li>
+            <li class="relative px-6 py-3">
+              <a
+                class="inline-flex hover:no-underline items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="charts.html"
+              > 
+                <span class="ml-4">Charts</span>
+              </a>
+            </li>
+            <li class="relative px-6 py-3">
+              <a
+                class="inline-flex hover:no-underline items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="buttons.html"
+              > 
+                <span class="ml-4">Buttons</span>
+              </a>
+            </li>
+            <li class="relative px-6 py-3">
+              <a
+                class="inline-flex hover:no-underline items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="modals.html"
+              > 
+                <span class="ml-4">Modals</span>
+              </a>
+            </li>
+            <li class="relative px-6 py-3">
+              <a
+                class="inline-flex hover:no-underline items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="tables.html"
+              > 
+                <span class="ml-4">Tables</span>
+              </a>
+            </li>
+            <li class="relative px-6 py-3">
+              <button
+                class="inline-flex  items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                @click="togglePagesMenu"
+                aria-haspopup="true"
+              >
+                <span class="inline-flex items-center"> 
+                  <span class="ml-4">Pages</span>
+                </span> 
+              </button>
+              <template x-if="isPagesMenuOpen">
+                <ul
+                  x-transition:enter="transition-all ease-in-out duration-300"
+                  x-transition:enter-start="opacity-25 max-h-0"
+                  x-transition:enter-end="opacity-100 max-h-xl"
+                  x-transition:leave="transition-all ease-in-out duration-300"
+                  x-transition:leave-start="opacity-100 max-h-xl"
+                  x-transition:leave-end="opacity-0 max-h-0"
+                  class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+                  aria-label="submenu"
+                >
+                  <li
+                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  >
+                    <a class="w-full" href="pages/login.html">Login</a>
+                  </li>
+                  <li
+                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  >
+                    <a class="w-full" href="pages/create-account.html">
+                      Create account
+                    </a>
+                  </li>
+                  <li
+                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  >
+                    <a class="w-full" href="pages/forgot-password.html">
+                      Forgot password
+                    </a>
+                  </li>
+                  <li
+                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  >
+                    <a class="w-full" href="pages/404.html">404</a>
+                  </li>
+                  <li
+                    class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                  >
+                    <a class="w-full" href="pages/blank.html">Blank</a>
+                  </li>
+                </ul>
+              </template>
+            </li>
+          </ul>
+          <div class="px-6 my-6">
+            <button
+              class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+            >
+              Create account
+              <span class="ml-2" aria-hidden="true">+</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+        </div>
+
         <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
             <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
         
@@ -230,8 +360,7 @@
             }) 
         }) 
     </script>
-    <script src="{{ asset('js/moment.min.js') }}"></script> 
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> 
+    <script src="{{ asset('js/moment.min.js') }}"></script>  
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/popper.min.js') }}"></script>

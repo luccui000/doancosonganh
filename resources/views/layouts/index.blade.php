@@ -7,7 +7,7 @@
     <title>Index</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="{{ asset('plugins/fontawesome/css/all.css') }}" rel="stylesheet" >   
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet"> 
     <style>
@@ -22,6 +22,19 @@
             right: -25px;
             border-top: 36px solid #4338ca;
             border-right: 25px solid transparent;
+        } 
+        .dropdown {
+            position: relative;
+        }
+        .dropdown__menu {
+            display: none;
+            position: absolute; 
+            background-color: #ffffff; 
+            min-width: 180px; 
+            z-index: 100;
+        }
+        .dropdown:hover .dropdown__menu {
+            display: block; 
         } 
     </style>
     @livewireStyles
@@ -94,13 +107,19 @@
                                 <div class="text-white ml-2 cursor-pointer">
                                     @if(auth()->guard('khachhangs')->user())
                                         <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <div class="mt-2 guest">
                                                 {{ auth()->guard('khachhangs')->user()->ho_ten }}
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="#">Action</a></li>
-                                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                            </div>
+                                            <ul class="dropdown__menu shadow-md rounded-md" >
+                                                <li class="hover:bg-gray-100 p-2"><a class="hover:no-underline text-gray-700 cursor-pointer hover:text-gray-900" 
+                                                    href="{{ route('khachhang.taikhoan') }}">Tài khoản của tôi</a>
+                                                </li>
+                                                <li class="hover:bg-gray-100 p-2 border-gray-200 border-b-2"><a class="hover:no-underline text-gray-700 cursor-pointer hover:text-gray-900" 
+                                                    href="{{ route('khachhang.donhang') }}">Đơn hàng của tôi</a>
+                                                </li>
+                                                <li class="hover:bg-gray-100 p-2"><a class="hover:no-underline text-gray-700 cursor-pointer hover:text-gray-900" 
+                                                    href="#">Đăng xuất</a>
+                                                </li>
                                             </ul>
                                         </div> 
                                     @else

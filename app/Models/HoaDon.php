@@ -30,4 +30,12 @@ class HoaDon extends Model
     {
         return $this->belongsTo(KhachHang::class);
     } 
+    public function getTongThanhToanVndAttribute()
+    {
+        return money_format('%.0n', $this->tong_thanh_toan);
+    }
+    public function getTongTienVndAttribute()
+    {
+        return money_format('%.0n', $this->tong_tien);
+    }
 }

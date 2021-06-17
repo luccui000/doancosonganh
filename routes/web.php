@@ -16,11 +16,16 @@ Route::get('/dangnhap/{provider}', [App\Http\Controllers\XacThucController::clas
     ->name('dangnhap.mangxahoi');
 Route::get('/{provider}/callback', [App\Http\Controllers\XacThucController::class, 'handleProviderCallback'])
     ->name('dangnhap.callback');
-    
+
+Route::group(['as' => 'khachhang.'], function() {
+    Route::get('/donhang', [App\Http\Controllers\KhachHangController::class, 'donhang'])->name('donhang');
+    Route::get('/taikhoan', [App\Http\Controllers\KhachHangController::class, 'taikhoan'])->name('taikhoan');
+});    
+
 Route::group(['as' => 'trangchu.'], function() {
     Route::get('/', [App\Http\Controllers\TrangChuController::class, 'index'])->name('index');
     Route::get('/xemgiohang', [App\Http\Controllers\TrangChuController::class, 'xemgiohang'])->name('xemgiohang');
-    Route::get('/{id}', [App\Http\Controllers\TrangChuController::class, 'show'])->name('show');
+    Route::get('/{id}/', [App\Http\Controllers\TrangChuController::class, 'show'])->name('show');
     Route::post('{id}/themvaogiohang', [App\Http\Controllers\TrangChuController::class, 'themvaogiohang'])->name('themvaogiohang');
     Route::group(['prefix' => 'giohang'], function() {
         Route::post('{id}/capnhat', [App\Http\Controllers\TrangChuController::class, 'capnhatGiohang'])->name('capnhatsoluong');
