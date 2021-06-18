@@ -23,6 +23,13 @@ class KhachHang extends Authenticatable
         'mangxahoi_id',
         'trang_thai',
     ];
+    public static $timkiem = [
+        'ho_ten',
+        'email',
+        'dien_thoai',
+        'dia_chi',
+        'tai_khoan_ngan_hang',
+    ];
     public const VALIDATION_RULES = [
         'ho_ten' => 'required', 
         'dien_thoai' => 'required|unique:KHACHHANG' 

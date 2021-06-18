@@ -1,16 +1,14 @@
 @extends('layouts.app')
+@push('styles')
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/datatable.css') }}">
+@endpush
 @section('content')
-<div class="col-span-full xl:col-span-8 bg-white shadow rounded-sm border border-gray-200">
-    <header class="px-2 py-2 border-b border-gray-100 flex justify-between">
-        <div class="">
-            <h2 class="font-semibold text-gray-800 pt-2">Danh sách các hãng sản xuất</h2>
-        </div> 
-        <a href="{{ route('admin.hangsanxuat.create') }}" class="border border-green-500 hover:no-underline bg-green-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline" >
-            Thêm mới
-        </a>
-    </header>
-    <div class="overflow-x-auto">
-        <table class="table-auto w-full"> 
+<div class="w-full bg-white rounded-lg pb-12">  
+    <div class="pl-2 pr-2 ">
+        <h3 class="py-2">Danh sách khách hàng mới</h3>
+        <table class="table-auto w-full datatable"> 
             <thead class="text-xs uppercase text-gray-400 bg-gray-50 rounded-sm">
                 <tr> 
                     <th class="pt-3 pb-3"><div class="font-semibold text-center">#</div> </th> 
@@ -52,3 +50,18 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(function () { 
+            var table = $('.datatable').DataTable({
+                    "bPaginate": false,
+                    "bInfo": false,
+                    "language": {
+                        "search": "Tìm kiếm:"
+                    }
+            });
+        });
+    </script>
+@endpush

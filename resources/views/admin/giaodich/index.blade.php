@@ -1,28 +1,29 @@
 @extends('layouts.app')
+@push('styles')
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/datatable.css') }}">
+@endpush
 @section('content') 
-    <div class="p-2 col-span-full xl:col-span-8 bg-white shadow rounded-sm border border-gray-200">
-        <header class="px-2 py-2 border-b border-gray-100 flex justify-between">
-            <div class="">
-                <h2 class="font-semibold text-gray-800 pt-2">Danh sách giao dịch</h2>
-            </div>  
-        </header>
-        <div class="w-full overflow-hidden rounded-lg shadow-xs">
-            <div class="w-full overflow-x-auto">
-              <table class="w-full whitespace-no-wrap">
-                <thead>
-                  <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
-                    <th class="px-4 py-3">#</th>
-                    <th class="px-4 py-3">Ngày giao dịch</th>
-                    <th class="px-4 py-3">Mã ngân hàng</th>
-                    <th class="px-4 py-3">Mã giao dịch</th>
-                    <th class="px-4 py-3">Khách hàng</th>
-                    <th class="px-4 py-3">Mã hóa đơn</th>
-                    <th class="px-4 py-3">Loại thẻ</th> 
-                    <th class="text-center px-4 py-3">Mã giao dịch VNPAY</th>
-                    <th class="px-4 py-3"></th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white divide-y dark:bg-gray-800">
+<div class="w-full bg-white rounded-lg pb-12">  
+    <div class="pl-2 pr-2 ">
+      <h3 class="py-2">Danh sách khách hàng mới</h3>
+    <div class="">
+        <table class="w-full whitespace-no-wrap datatable">
+            <thead>
+                <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">
+                <th class="px-4 py-3">#</th>
+                <th class="px-4 py-3">Ngày giao dịch</th>
+                <th class="px-4 py-3">Mã ngân hàng</th>
+                <th class="px-4 py-3">Mã giao dịch</th>
+                <th class="px-4 py-3">Khách hàng</th>
+                <th class="px-4 py-3">Mã hóa đơn</th>
+                <th class="px-4 py-3">Loại thẻ</th> 
+                <th class="text-center px-4 py-3">Mã giao dịch VNPAY</th>
+                <th class="px-4 py-3"></th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y dark:bg-gray-800">
                 @foreach ($giaodichs as $giaodich)
                     <tr class="text-gray-700 ">
                         <td class="px-4 py-1 text-sm">
@@ -58,9 +59,24 @@
                         </td>
                     </tr>  
                 @endforeach
-                </tbody>
-              </table>
-            </div> 
-        </div>
+            </tbody>
+        </table>
+    </div>  
     </div>
+</div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(function () { 
+          var table = $('.datatable').DataTable({
+                "bPaginate": false,
+                "bInfo": false,  
+                "language": {
+                    "search": "Tìm kiếm:"
+                }
+          });
+        });
+    </script>
+@endpush

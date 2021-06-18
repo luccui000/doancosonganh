@@ -26,6 +26,10 @@ class SanPham extends Model
         'hangsanxuat_id',
         'loaisanpham_id',
     ]; 
+    public static $timkiem = [
+        'ma_sanpham',
+        'ten_sanpham',
+    ];
     public function hinhanh()
     {
         return $this->belongsToMany(HinhAnh::class, 'HINHANH_SANPHAM', 'sanpham_id' ,'hinhanh_id');

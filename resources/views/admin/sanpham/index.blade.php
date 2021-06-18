@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('content')
-    <div class="col-span-full xl:col-span-8 bg-white shadow rounded-sm border border-gray-200">
-        <header class="px-2 py-2 border-b border-gray-100 flex justify-between">
-            <div class="">
+    <div class="col-span-full xl:col-span-8 bg-white shadow border border-gray-200 rounded-sm">
+        <div class="px-2 py-2 border-b border-gray-100 flex justify-between rounded-sm">
+            <div class="rounded-sm">
                 <h2 class="font-semibold text-gray-800 pt-2">Danh sách các mặt hàng</h2>
             </div> 
             <a href="{{ route('admin.sanpham.create') }}" class="border border-green-500 hover:no-underline bg-green-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline" >
                 Thêm mới
             </a>
-        </header>
+        </div>
         <div class="p-3">
             <div x-data="{ openTab: 1 }"  data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t" data-tabs-index="2">
                 <ul class="flex border-b mb-0">

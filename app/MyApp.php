@@ -32,4 +32,13 @@ class MyApp {
         '2' => 'Đã chuyển khoản',
     ];
     const LOAI_XAC_THUC = ['facebook', 'google'];
+    const SIDEBAR_NAME = [
+        'SanPham' => 'Trang chủ',
+        'SanPham' => 'Sản phẩm',
+        'HoaDon' => 'Hóa đơn',
+        'HangSanXuat' => 'Hãng sản xuất',
+        'BaoCao' => 'Báo cáo',
+        'GiaoDich' => 'Giao dịch',
+        'KhachHang' => 'Khách hàng',
+    ];
 }

@@ -17,6 +17,13 @@ class HangSanXuat extends Model
         'website', 
         'trang_thai',
     ];
+    public static $timkiem = [
+        'ten_hang',
+        'dia_chi',
+        'email',
+        'dien_thoai',
+        'website', 
+    ];
     public const VALIDATION_RULES = [
         'ten_hang' => 'required', 
     ];

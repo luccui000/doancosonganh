@@ -21,6 +21,11 @@ class HoaDon extends Model
 
         'khachhang_id',
     ];
+    public static $timkiem = [
+        'khachhang_id',
+        'ma_giao_dich',
+        'hinh_thuc_thanh_toan'
+    ];
     public function sanpham()
     {
         return $this->belongsToMany(SanPham::class, 'CHITIETHOADON','hoadon_id', 'sanpham_id')

@@ -25,6 +25,14 @@ class GiaoDich extends Model
         'hoadon_id',
         'khachhang_id',
     ];
+    public static $timkiem = [
+        'vnp_ma_ngan_hang',
+        'vnp_ma_giao_dich_ngan_hang',
+        'vnp_ma_merchant',
+        'vnp_ma_giao_dich_vnpay',
+        'vnp_ma_kiem_tra',
+        'noi_dung_chuyen'
+    ];
     public function hoadon()
     {
         return $this->belongsTo(HoaDon::class, 'hoadon_id', 'id');

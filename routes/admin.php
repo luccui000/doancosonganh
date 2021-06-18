@@ -29,10 +29,14 @@ Route::group(['as' => 'admin.'], function() {
         Route::get('/{id}', [Controllers\HoaDonController::class, 'show'])->name('show');
         Route::put('/{id}/update', [Controllers\HoaDonController::class, 'update'])->name('update');
     });
-    Route::group(['as' => 'bieudo.', 'prefix' => 'bieudo'], function() {
+    Route::group(['as' => 'baocao.', 'prefix' => 'baocao'], function() {
         Route::get('/', [Controllers\BieuDoController::class, 'index'])->name('index');
     }); 
-    Route::group(['prefix' => 'giaodich'], function() {
-        Route::get('/', [Controllers\GiaoDichController::class, 'index'])->name('giaodich.index');
+    Route::group(['as' => 'giaodich.', 'prefix' => 'giaodich'], function() {
+        Route::get('/', [Controllers\GiaoDichController::class, 'index'])->name('index');
+    });
+    Route::group(['as' => 'khachhang.', 'prefix' => 'khachhang'], function() {
+        Route::get('/', [Controllers\KhachHangController::class, 'index'])->name('index');
+        Route::get('/getKhachHang', [Controllers\KhachHangController::class, 'getKhachHang'])->name('getKhachHang');
     });
 });
