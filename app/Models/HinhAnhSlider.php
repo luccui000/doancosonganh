@@ -5,21 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HinhAnhSanPham extends Model
+class HinhAnhSlider extends Model
 {
     use HasFactory;
-    protected $table = 'HINHANH_SANPHAM';
+    protected $table = 'HINHANH_SLIDER';
 
     public $fillable = [
-        'sanpham_id',
-        'hinhanh_id'
+        'hinhanh_id',
+        'slider_id',
+        'vi_tri',
     ];
+    public function slider()
+    {
+        return $this->belongsToMany(Slider::class);
+    }
     public function hinhanh()
     {
         return $this->belongsToMany(HinhAnh::class);
     }
-    public function sanpham() 
-    {
-        return $this->belongsToMany(SanPham::class);
-    } 
 }
