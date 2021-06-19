@@ -40,5 +40,6 @@ class MyApp {
         'BaoCao' => 'Báo cáo',
         'GiaoDich' => 'Giao dịch',
         'KhachHang' => 'Khách hàng',
-    ];
+        'HinhAnh' => 'Hình ảnh',
+    ]; 
 }

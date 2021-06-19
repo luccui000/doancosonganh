@@ -39,4 +39,7 @@ Route::group(['as' => 'admin.'], function() {
         Route::get('/', [Controllers\KhachHangController::class, 'index'])->name('index');
         Route::get('/getKhachHang', [Controllers\KhachHangController::class, 'getKhachHang'])->name('getKhachHang');
     });
+    Route::group(['as' => 'hinhanh.', 'prefix' => 'hinhanh'], function() {
+        Route::get('/', [Controllers\HinhAnhController::class, 'index'])->name('index');
+    });
 });

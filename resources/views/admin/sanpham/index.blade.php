@@ -1,59 +1,58 @@
 @extends('layouts.app')
+@push('styles')
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/datatable.css') }}">
+@endpush
 @section('content')
-    <div class="col-span-full xl:col-span-8 bg-white shadow border border-gray-200 rounded-sm">
-        <div class="px-2 py-2 border-b border-gray-100 flex justify-between rounded-sm">
-            <div class="rounded-sm">
-                <h2 class="font-semibold text-gray-800 pt-2">Danh sách các mặt hàng</h2>
-            </div> 
-            <a href="{{ route('admin.sanpham.create') }}" class="border border-green-500 hover:no-underline bg-green-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline" >
-                Thêm mới
-            </a>
-        </div>
-        <div class="p-3">
-            <div x-data="{ openTab: 1 }"  data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t" data-tabs-index="2">
-                <ul class="flex border-b mb-0">
-                    @foreach (App\Models\LoaiSanPham::all() as $loaisanpham)
-                        <li @click="openTab = {{ $loaisanpham->id  }}" class="-mb-px mr-1">
-                            <a x-bind:class="{ 'bg-gray-50 text-green-500': openTab === {{ $loaisanpham->id }} }" class="cursor-pointer inline-block border-l border-t border-r rounded-t py-2 px-4 text-gray-500 font-semibold hover:text-green-500 hover:no-underline">{{ $loaisanpham->ten_loai_sanpham }}</a>
-                        </li>   
-                    @endforeach
-                </ul> 
-            <div class="overflow-x-auto">
-                <table class="table-auto w-full"> 
+<div class="w-full bg-white rounded-lg pb-12">  
+    <div class="px-2 py-2 border-b border-gray-100 flex justify-between rounded-sm">
+        <div class="rounded-sm">
+            <h2 class="font-semibold text-gray-800 pt-2">Danh sách các mặt hàng</h2>
+        </div> 
+        <a href="{{ route('admin.sanpham.create') }}" class="border border-green-500 hover:no-underline bg-green-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline" >
+            Thêm mới
+        </a>
+    </div>
+    <div class="p-3">
+        <div x-data="{ openTab: 1 }"  data-tabs-active-tab="-mb-px border-l border-t border-r rounded-t" data-tabs-index="2">
+            <ul class="flex border-b mb-0">
+                @foreach (App\Models\LoaiSanPham::all() as $loaisanpham)
+                    <li @click="openTab = {{ $loaisanpham->id  }}" x-bind:class="{ 'border-t-2 border-green-400' : openTab === {{ $loaisanpham->id  }}  }" class="-mb-px mr-1  rounded">
+                        <a x-bind:class="{ 'bg-gray-50 text-green-500': openTab === {{ $loaisanpham->id }} }" class="cursor-pointer inline-block border-l border-t border-r rounded-t py-2 px-4 text-gray-500 font-semibold hover:text-green-500 hover:no-underline">{{ $loaisanpham->ten_loai_sanpham }}</a>
+                    </li>   
+                @endforeach
+            </ul> 
+            <div class="shadow-md">
+                <table class="w-full whitespace-no-wrap datatable"> 
                     <thead class="text-xs uppercase text-gray-400 bg-gray-50 rounded-sm">
-                        <tr> 
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center">#</div> </th> 
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Hình ảnh</div></th>
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Tên sản phẩm</div></th>
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center truncate">Đường dẫn liên kết</div></th>
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Số lượng tồn</div></th> 
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Hãng sản xuất</div></th> 
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Thông tin khuyến mãi</div></th>
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Bảo hành</div></th>
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Giá nhập</div></th>
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Giá niêm yết</div></th>
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center">Giá nhập</div></th> 
-                            <th class="pt-3 pb-3"><div class="font-semibold text-center"></div></th> 
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b bg-gray-50">  
+                            <th class="px-4 py-3">#</th> 
+                            <th class="px-4 py-3">Hình ảnh</th>
+                            <th class="px-4 py-3">Tên sản phẩm</th>
+                            <th class="px-4 py-3">Đường dẫn liên kết</th>
+                            <th class="px-4 py-3">Số lượng tồn</th> 
+                            <th class="px-4 py-3">Hãng sản xuất</th>  
+                            <th class="px-4 py-3">Giá nhập</th>
+                            <th class="px-4 py-3">Giá niêm yết</th>
+                            <th class="px-4 py-3">Giá nhập</th> 
+                            <th class="px-4 py-3"></th> 
                         </tr>
                     </thead>
-                    <tbody class="text-sm font-medium divide-y divide-gray-100">  
+                    <tbody class="bg-white divide-y">  
                         @foreach ($sanphams as $sanpham) 
                             <tr x-show="openTab === {{ $sanpham->loaisanpham->id }}" > 
-                                <td class="p-2"><div class="cursor-pointer text-center">{{ $sanpham->ma_sanpham }}</div></td>
-                                <td class="p-2">
-                                    <div style="width: 100px;" >
-                                        <img  class="w-44 h-20" src="{{ $sanpham->hinh_anh_san_pham }}"/>
-                                    </div>
+                                <td class="px-4 text-sm">{{ $sanpham->ma_sanpham }}</td>
+                                <td class="px-4 text-sm w-20 h-20">
+                                    <img  class="w-44 h-20" src="{{ $sanpham->hinh_anh_san_pham }}"/> 
                                 </td>
-                                <td class="p-2"><div style="max-width: 300px;" class="text-center text-truncate" title="{{ $sanpham->ten_sanpham }}">{{ $sanpham->ten_sanpham }}</div></td> 
-                                <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate"  title="{{ $sanpham->duong_dan_lien_ket }}">{{ $sanpham->duong_dan_lien_ket }}</div></td> 
-                                <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate"  ">{{ $sanpham->so_luong_ton_kho }}</div></td> 
-                                <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->hangsanxuat->ten_hang }}">{{ $sanpham->hangsanxuat->ten_hang }}</div></td>  
-                                <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ $sanpham->thong_tin_khuyen_mai }}">{{ $sanpham->thong_tin_khuyen_mai }}</div></td> 
-                                <td class="p-2"><div style="max-width: 150px;" class="text-center text-truncate" title="{{ App\MyApp::THONG_TIN_BAO_HANH[$sanpham->bao_hanh] }}">{{ App\MyApp::THONG_TIN_BAO_HANH[$sanpham->bao_hanh] }}</div></td> 
-                                <td class="p-2"><div class="text-center">{{ $sanpham->gia_nhap_vnd }}</div></td> 
-                                <td class="p-2"><div class="text-center">{{ $sanpham->gia_niem_yet_vnd }}</div></td> 
-                                <td class="p-2"><div class="text-center text-red-500  text-lg">{{ $sanpham->gia_khuyen_mai_vnd }}</div></td> 
+                                <td class="px-4 text-sm truncate" style="max-width: 300px" title="{{ $sanpham->ten_sanpham }}"> {{ $sanpham->ten_sanpham }}</td> 
+                                <td class="px-4 text-sm truncate" style="max-width: 150px;" title="{{ $sanpham->duong_dan_lien_ket }}" >{{ $sanpham->duong_dan_lien_ket }}</td> 
+                                <td class="px-4 text-sm"> {{ $sanpham->so_luong_ton_kho }}</td> 
+                                <td class="px-4 text-sm" title="{{ $sanpham->hangsanxuat->ten_hang }}">{{ $sanpham->hangsanxuat->ten_hang }}</td>     
+                                <td class="px-4 text-sm">{{ $sanpham->gia_nhap_vnd }}</td> 
+                                <td class="px-4 text-sm">{{ $sanpham->gia_niem_yet_vnd }}</td> 
+                                <td class="px-4 text-md font-bold text-red-600">{{ $sanpham->gia_khuyen_mai_vnd }}</td> 
                                 <td class="">
                                     <div class="flex item-center justify-center">
                                         <a class="w-4 mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
@@ -81,8 +80,24 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
+                </table> 
             </div>
         </div>
-    </div>
+    </div> 
+</div>
 @endsection
+@push('scripts')
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(function () { 
+          var table = $('.datatable').DataTable({
+                "bPaginate": false,
+                "bInfo": false,  
+                "language": {
+                    "search": "Tìm kiếm:"
+                }
+          });
+        });
+    </script>
+@endpush
