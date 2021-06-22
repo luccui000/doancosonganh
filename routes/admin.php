@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers; 
 
 Route::get('/dangnhap', [Controllers\XacThucController::class, 'dangnhap'])->name('admin.dangnhap');
 Route::post('/dangnhap', [Controllers\XacThucController::class, 'xacthuc'])->name('admin.xacthuc');
+
 
 
 Route::group(['as' => 'admin.'], function() {
@@ -41,5 +41,11 @@ Route::group(['as' => 'admin.'], function() {
     });
     Route::group(['as' => 'hinhanh.', 'prefix' => 'hinhanh'], function() {
         Route::get('/', [Controllers\HinhAnhController::class, 'index'])->name('index');
+    });
+    Route::group(['as' => 'slider.', 'prefix' => 'slider'], function() {
+        Route::get('/', [Controllers\SliderController::class, 'index'])->name('index');
+        Route::get('/create', [Controllers\SliderController::class, 'create'])->name('create');
+        Route::post('/store', [Controllers\SliderController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [Controllers\SliderController::class, 'edit'])->name('edit');
     });
 });

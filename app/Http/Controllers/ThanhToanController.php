@@ -20,10 +20,9 @@ class ThanhToanController extends Controller
         $vnp_TxnRef = date("YmdHis"); 
         $vnp_OrderInfo = "Thanh toán hóa đơn mua hàng";
         $vnp_OrderType = 'billpayment';
-        $vnp_Amount =  str_replace('.', '', Cart::total());
+        $vnp_Amount =  str_replace('.', '', Cart::total()) * 100;
         $vnp_Locale = 'vn';
         $vnp_IpAddr = request()->ip();
-
  
         $inputData = array(
             "vnp_Version" => "2.0.0",

@@ -118,7 +118,7 @@
                                                     href="{{ route('khachhang.donhang') }}">Đơn hàng của tôi</a>
                                                 </li>
                                                 <li class="hover:bg-gray-100 p-2"><a class="hover:no-underline text-gray-700 cursor-pointer hover:text-gray-900" 
-                                                    href="#">Đăng xuất</a>
+                                                    href="{{ route('dangxuatkhach') }}">Đăng xuất</a>
                                                 </li>
                                             </ul>
                                         </div> 

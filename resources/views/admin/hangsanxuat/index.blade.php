@@ -3,11 +3,19 @@
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/datatable.css') }}">
+    <style>
+        .dataTables_wrapper select,
+        .dataTables_wrapper .dataTables_filter {
+            position: absolute;
+            top: -40px;
+            right: 100px;
+        }
+    </style>
 @endpush
 @section('content')
 <div class="w-full bg-white rounded-lg pb-12">  
     <div class="pl-2 pr-2 ">
-        <h3 class="py-2">Danh sách khách hàng mới</h3>
+        <h3 class="py-2">Danh sách hãng sản xuất <a href="{{ route('admin.hangsanxuat.create') }}" style="margin-top: 7px;" class="hover:no-underline cursor-pointer absolute right-2 font-normal text-sm p-1 bg-green-600 rounded text-white hover:bg-green-500">Thêm mới</a></h3> 
         <table class="table-auto w-full datatable"> 
             <thead class="text-xs uppercase text-gray-400 bg-gray-50 rounded-sm">
                 <tr> 

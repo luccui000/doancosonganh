@@ -50,6 +50,11 @@ class XacThucController extends Controller
     {
         return view('trangchu.dangnhap');
     }
+    public function dangxuat()
+    {
+        auth()->guard('khachhangs')->logout();
+        return redirect()->route('trangchu.index');
+    }
     public function xacthucKhach(Request $request)
     {
         $request->validate(['email' => 'required|email:rfc,dns', 'mat_khau' => 'required'],
@@ -94,4 +99,5 @@ class XacThucController extends Controller
         
         return redirect()->route('trangchu.index');
     }
+    
 }

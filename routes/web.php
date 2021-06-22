@@ -1,10 +1,10 @@
 <?php
-
-use App\Http\Controllers\XacThucController;
+ 
 use Illuminate\Support\Facades\Route;
  
 Route::get('dangky', [App\Http\Controllers\XacThucController::class, 'dangkyKhach'])->name('dangkykhach');
 Route::post('dangky', [App\Http\Controllers\XacThucController::class, 'formDangky'])->name('formdangky');
+Route::get('dangxuat', [App\Http\Controllers\XacThucController::class, 'dangxuat'])->name('dangxuatkhach');
 
 Route::get('dangnhap', [App\Http\Controllers\XacThucController::class, 'dangnhapKhach'])->name('dangnhapkhach');
 Route::post('dangnhap', [App\Http\Controllers\XacThucController::class, 'xacthucKhach'])->name('xacthuckhach');

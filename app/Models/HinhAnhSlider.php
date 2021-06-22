@@ -13,6 +13,9 @@ class HinhAnhSlider extends Model
     public $fillable = [
         'hinhanh_id',
         'slider_id',
+        'tieu_de',
+        'chu_chuyen_huong',
+        'mo_ta',
         'vi_tri',
     ];
     public function slider()
