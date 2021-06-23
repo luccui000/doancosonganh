@@ -19,7 +19,7 @@ class Slider extends Model
     public function hinhanh()
     {
         return $this->belongsToMany(HinhAnh::class, 'HINHANH_SLIDER', 'slider_id' ,'hinhanh_id')
-                        ->withPivot(['vi_tri', 'tieu_de', 'chu_chuyen_huong', 'mo_ta']);
+                        ->withPivot(['id', 'vi_tri', 'tieu_de', 'chu_chuyen_huong', 'mo_ta']);
     }
     
     public function getTrangThaiChuAttribute() 

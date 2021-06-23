@@ -34,7 +34,9 @@
                     {{ $loop->iteration }}
                 </td>
                 <td class="px-4 py-3 text-sm">
-                    {{ $slider->ten_slider }}
+                    <a href="{{ route('admin.slider.edit', $slider->id) }}">
+                        {{ $slider->ten_slider }}
+                    </a> 
                 </td>
                 <td class="px-4 py-3 text-xs">
                 {{ $slider->key_slider }} 
@@ -47,14 +49,11 @@
                         {{ $slider->trang_thai_chu }}
                     </span>
                 </td>  
-                <td class="text-center w-20">
-                    <a class="inline-block w-4 h mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
-                        <i class="fa fa-eye"></i>
-                    </a>
+                <td class="text-center w-20"> 
                     <a href="{{ route('admin.slider.edit', $slider->id) }}" class="inline-block w-4 h mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
                         <i class="fa fa-pencil-alt"></i>
                     </a>
-                    <a class="inline-block w-4 h mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
+                    <a  class="inline-block w-4 h mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
                         <i class="fa fa-trash"></i>
                     </a>
                 </td>

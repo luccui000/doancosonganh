@@ -45,8 +45,10 @@ Route::group(['as' => 'admin.'], function() {
     Route::group(['as' => 'slider.', 'prefix' => 'slider'], function() {
         Route::get('/', [Controllers\SliderController::class, 'index'])->name('index');
         Route::get('/create', [Controllers\SliderController::class, 'create'])->name('create');
-        Route::post('/store', [Controllers\SliderController::class, 'store'])->name('store');
+        Route::post('/store', [Controllers\SliderController::class, 'store'])->name('store'); 
         Route::get('/{id}/edit', [Controllers\SliderController::class, 'edit'])->name('edit');
         Route::post('{id}/addItem', [Controllers\SliderController::class, 'addItemToSlider'])->name('addItem');
+        Route::get('/{sliderId}/showItem/{itemId}', [Controllers\SliderController::class, 'showItemFromSlider'])->name('showItem');
+        Route::delete('/deleteItem/{id}', [Controllers\SliderController::class, 'deleteItemFromSlider'])->name('deleteItem');
     });
 });

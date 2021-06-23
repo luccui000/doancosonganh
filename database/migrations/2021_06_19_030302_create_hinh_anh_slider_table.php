@@ -14,6 +14,7 @@ class CreateHinhAnhSliderTable extends Migration
     public function up()
     {
         Schema::create('HINHANH_SLIDER', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('hinhanh_id')->constrained('HINHANH', 'id');
             $table->foreignId('slider_id')->constrained('SLIDER', 'id');
             $table->string('tieu_de', 100);

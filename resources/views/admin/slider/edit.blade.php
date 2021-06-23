@@ -51,7 +51,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8"> 
                     <div class="container p-3">
                         <h4 class="font-semibold text-gray-800 pt-2">Thêm hình ảnh cho slider</h4>  
-                        <button id="openModal" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <button id="openModal" type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target=".bd-example-modal-lg">
                             <i class="fa fa-plus"></i> Thêm mới
                         </button> 
                         <table class="w-full whitespace-no-wrap mb-2 datatable shadow-sm">
@@ -62,12 +62,11 @@
                                     <th class="px-4 py-3">Tiêu đề</th>
                                     <th class="px-4 py-3">Vị trí</th>
                                     <th class="px-4 py-3">Ngày tạo</th>  
-                                    <th class="px-4 py-3"></th>   
+                                    <th class="px-4 py-3" ></th>   
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y">  
+                            <tbody class="bg-white divide-y">   
                                 @foreach ($slider->hinhanh as $hinhanhSlider)
-                                @json($hinhanhSlider)
                                 <tr class="text-gray-700 ">
                                     <td class="px-4 py-1 text-sm">
                                         {{ $loop->iteration }}
@@ -75,14 +74,24 @@
                                     <td class="py-3 text-sm w-28 h-20"> 
                                         <img class="w-44 h-20" src="{{ url($hinhanhSlider->duong_dan_hinh_anh) }}"/>   
                                     </td>
-                                    <td class="px-4 py-1 text-sm">
-                                        {{ $hinhanhSlider->tieu_de }}
+                                    <td class="px-4 py-1 text-sm truncate" style="max-width: 300px;">
+                                        {{ $hinhanhSlider->pivot->tieu_de }}
                                     </td>
-                                    <td class="px-4 py-1 text-sm">
-                                        {{ $hinhanhSlider->vi_tri }}
+                                    <td class="px-4 py-1 text-sm"> 
+                                        {{ $hinhanhSlider->pivot->vi_tri }}
                                     </td>
                                     <td class="px-4 py-1 text-sm">
                                         {{ $hinhanhSlider->created_at->format('d-m-Y') }}
+                                    </td> 
+                                    <td class="px-4 py-1 text-sm float-right mt-10" >
+                                        <form action="{{ route('admin.slider.deleteItem', $hinhanhSlider->pivot->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a 
+                                                href="{{ route('admin.slider.showItem', ['sliderId' => $slider->id, 'itemId' => $hinhanhSlider->pivot->id]) }}" 
+                                                class="bg-blue-500 text-white p-1 hover:no-underline hover:bg-blue-400 rounded "><i class="fa fa-pencil-alt"></i>edit</a>
+                                            <button  type="submit" class="bg-red-500 text-white p-1 hover:no-underline hover:bg-red-400 rounded"><i class="fa fa-trash"></i>delete</button> 
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -109,17 +118,19 @@
                     <div class="container mb-4">
                         <div class="mt-2">
                             <label class="text-md text-gray-600">Tiêu đề <span class="text-red-500">*</span></label></br>
-                            <input type="text" class="border-2 border-gray-300 p-2 w-full rounded focus:ring-2" name="tieu_de" value=""></input>
+                            <input value="{{ old('tieu_de') }}" type="text" class="border-2 border-gray-300 p-2 w-full rounded focus:ring-2" name="tieu_de" value=""></input>
                             @error('tieu_de') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                         </div>
                         <div class="mt-2">
                             <label class="text-md text-gray-600">Chữ chuyển hướng <span class="text-red-500">*</span></label></br>
-                            <input type="text" class="border-2 border-gray-300 p-2 w-full rounded focus:ring-2" name="tieu_de" value=""></input>
+                            <input value="{{ old('chu_chuyen_huong') }}" type="text" class="border-2 border-gray-300 p-2 w-full rounded focus:ring-2" name="chu_chuyen_huong" ></input>
                             @error('chu_chuyen_huong') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                         </div>
                         <div class="mt-2">
                             <label class="text-md text-gray-600">Mô tả  </label></br>
-                            <textarea name="mo_ta" class="w-full border-2 border-gray-200 rounded p-2  focus:ring-2" cols="30" rows="5"></textarea>
+                            <textarea name="mo_ta" class="w-full border-2 border-gray-200 rounded p-2  focus:ring-2" cols="30" rows="5">
+                                {{ old('chu_chuyen_huong') }}
+                            </textarea>
                             @error('mo_ta') <div class="mt-1 text-red-500 text-sm">{{ $message }}</div> @enderror
                         </div>
                         <div class="mt-2">  
@@ -143,13 +154,18 @@
     </div> 
 @endsection 
 @push('scripts') 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script>
     $(document).ready(function() { 
         var openModal = {{ request()->query('open_modal') }};
         if(openModal) {
             $("#openModal").click();
         }
+        function clearText() {
+            $("input[name=tieu_de").val("");
+            $("input[name=chu_chuyen_huong").val("");
+            $("input[name=mo_ta").val("");
+        } 
     })
     function loadPreview(input){
        var data = $(input)[0].files; //this file data
@@ -167,6 +183,7 @@
            }
        });
        $('.helptext').text('Nhấp vào hình để bỏ chọn hình');
-   }  
+    }  
+    
 </script>
 @endpush

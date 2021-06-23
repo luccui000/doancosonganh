@@ -14,7 +14,7 @@
             font-family: 'Roboto', sans-serif;
         }  
     </style>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" ></script> 
+    <script src="{{ asset("js/alpine.min.js") }}" ></script> 
     <title>Trang quản trị</title>
     @stack('styles')
     @livewireStyles
@@ -30,17 +30,7 @@
           @yield('content')
         </div>
       </main>  
-    </div> 
-    <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>  
-    <script>  
-        window.addEventListener('swal.modal', event => { 
-            Swal.fire({
-                title: event.detail.title,   
-                content: event.detail.content ?? "",   
-                icon: event.detail.type,   
-            }) 
-        }) 
-    </script>
+    </div>   
     @livewireScripts
     <script src="{{ asset('js/moment.min.js') }}"></script>  
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
