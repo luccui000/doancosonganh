@@ -47,5 +47,6 @@ Route::group(['as' => 'admin.'], function() {
         Route::get('/create', [Controllers\SliderController::class, 'create'])->name('create');
         Route::post('/store', [Controllers\SliderController::class, 'store'])->name('store');
         Route::get('/{id}/edit', [Controllers\SliderController::class, 'edit'])->name('edit');
+        Route::post('{id}/addItem', [Controllers\SliderController::class, 'addItemToSlider'])->name('addItem');
     });
 });

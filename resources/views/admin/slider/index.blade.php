@@ -51,7 +51,7 @@
                     <a class="inline-block w-4 h mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
                         <i class="fa fa-eye"></i>
                     </a>
-                    <a class="inline-block w-4 h mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
+                    <a href="{{ route('admin.slider.edit', $slider->id) }}" class="inline-block w-4 h mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">
                         <i class="fa fa-pencil-alt"></i>
                     </a>
                     <a class="inline-block w-4 h mr-2 transform hover:text-purple-500 text-gray-600 hover:scale-110">

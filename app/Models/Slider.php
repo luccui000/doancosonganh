@@ -21,6 +21,7 @@ class Slider extends Model
         return $this->belongsToMany(HinhAnh::class, 'HINHANH_SLIDER', 'slider_id' ,'hinhanh_id')
                         ->withPivot(['vi_tri', 'tieu_de', 'chu_chuyen_huong', 'mo_ta']);
     }
+    
     public function getTrangThaiChuAttribute() 
     {
         return $this->trang_thai === 1 ? 'Đang sử dụng' : 'Đã tắt';
