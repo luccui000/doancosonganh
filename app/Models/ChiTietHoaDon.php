@@ -26,4 +26,14 @@ class ChiTietHoaDon extends Model
     {
         return $this->belongsToMany(HoaDon::class);
     }
+    public function getDonGiaVndAttribute()
+    {
+        return money_format('%.0n', $this->don_gia);
+    }
+    public function getThanhTienVndAttribute()
+    {
+        return money_format('%.0n', $this->thanh_tien);
+    }
+    
+    
 }

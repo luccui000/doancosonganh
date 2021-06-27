@@ -100,7 +100,7 @@
                 <div class="flex justify-center space-x-2 mt-4">
                   <a href="" class="p-2 bg-gray-100 rounded text-gray-700 hover:bg-gray-200 w-1/3 text-center hover:no-underline">Hủy</a>
                   <button href="" class="p-2 bg-green-600 hover:bg-green-500 text-white rounded  w-1/3 text-center hover:no-underline">Xác nhận</button>
-                  <a href="" class="p-2 bg-blue-600 hover:bg-blue-500 rounded  text-white w-1/3 text-center hover:no-underline">In phiếu</a>
+                  <a href="{{ route('admin.export.pdf', $hoadon[0]->id) }}" class="p-2 bg-blue-600 hover:bg-blue-500 rounded  text-white w-1/3 text-center hover:no-underline">In phiếu</a>
                 </div>
               </form>
             </div> 

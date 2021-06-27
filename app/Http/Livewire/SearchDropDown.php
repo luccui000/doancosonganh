@@ -24,8 +24,7 @@ class SearchDropDown extends Component
                                 ->where('ten_sanpham', 'like', $term)
                                 ->orWhere('ma_sanpham', 'like', $term)
                                 ->take(5)->get();
-        } 
-        sleep(1);
+        }  
     }
     public function render()
     { 

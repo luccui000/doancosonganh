@@ -178,6 +178,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -235,6 +236,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

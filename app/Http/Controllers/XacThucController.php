@@ -23,6 +23,7 @@ class XacThucController extends Controller
     }
     public function formDangky(Request $request)
     {
+        dd($request->all());
         $request->validate(array_merge(KhachHang::VALIDATION_RULES, [
             'email' => 'required|email:rfc,dns',
             'mat_khau' => 'required|min:6|max:100',

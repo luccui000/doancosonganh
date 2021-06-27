@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('test/mail', function() {
     Mail::to('email@gmail.com')->send(new WelcomeMail());
     return new WelcomeMail();
-});
+}); 
+
 Route::get('dangky', [App\Http\Controllers\XacThucController::class, 'dangkyKhach'])->name('dangkykhach');
 Route::post('dangky', [App\Http\Controllers\XacThucController::class, 'formDangky'])->name('formdangky');
 Route::get('dangxuat', [App\Http\Controllers\XacThucController::class, 'dangxuat'])->name('dangxuatkhach');

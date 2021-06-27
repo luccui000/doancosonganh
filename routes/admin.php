@@ -7,7 +7,6 @@ Route::get('/dangnhap', [Controllers\XacThucController::class, 'dangnhap'])->nam
 Route::post('/dangnhap', [Controllers\XacThucController::class, 'xacthuc'])->name('admin.xacthuc');
 
 
-
 Route::group(['as' => 'admin.'], function() {
     Route::group(['as' => 'sanpham.', 'prefix' => 'sanpham'], function() {
         Route::get('/', [Controllers\SanPhamController::class, 'index'])->name('index');
@@ -51,4 +50,5 @@ Route::group(['as' => 'admin.'], function() {
         Route::get('/{sliderId}/showItem/{itemId}', [Controllers\SliderController::class, 'showItemFromSlider'])->name('showItem');
         Route::delete('/deleteItem/{id}', [Controllers\SliderController::class, 'deleteItemFromSlider'])->name('deleteItem');
     });
+    Route::get('{id}/pdf', [App\Http\Controllers\ExportController::class, 'pdf'])->name('export.pdf');
 });
