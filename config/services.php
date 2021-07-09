@@ -39,4 +39,13 @@ return [
         'client_secret' => 'MVdOD_a9CWFKRGb7lDoRDvug',
         'redirect' => 'http://localhost:8000/google/callback',
     ],
+    'giaohangnhanh' => [
+        'token' => env('GIAOHANGNHANH_TOKEN'),
+        'shop_id' => env('GIAOHANGNHANH_SHOP_ID'),
+        'from_province_id' => env('GIAOHANGNHANH_FROM_PROVINCE_ID'),
+        'from_district_id' => env('GIAOHANGNHANH_FROM_DISTRICT_ID'),
+        'api_get_province' => 'https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province',
+        'api_get_district' => 'https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district',
+        'api_get_ward' => 'https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward',
+    ],
 ];

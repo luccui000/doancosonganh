@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\District;
 use App\Models\KhachHang; 
+use App\Models\Ward; 
 use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\Hash; 
 use Socialite, URL; 
+use Address;
 
 class XacThucController extends Controller
 {
@@ -23,7 +26,13 @@ class XacThucController extends Controller
     }
     public function formDangky(Request $request)
     {
-        dd($request->all());
+        $ward = Address::getWard($request); 
+        $district = Address::getDistrict($request); 
+        $province = Address::getProvince($request); 
+          
+        $diachi = $ward.', '.$district.', '.$province;
+          
+
         $request->validate(array_merge(KhachHang::VALIDATION_RULES, [
             'email' => 'required|email:rfc,dns',
             'mat_khau' => 'required|min:6|max:100',
@@ -36,13 +45,16 @@ class XacThucController extends Controller
             'mat_khau.max' => 'Vui lòng nhập mật khẩu nhỏ hơn 100 ký tự',
             'xac_nhan_mat_khau.required' => 'Vui lòng nhập lại mật khẩu ',
             'xac_nhan_mat_khau.same' => 'Mật khẩu không trùng nhau'
-        ]));
+        ])); 
         KhachHang::create([
             'ho_ten' => $request->input('ho_ten'),
             'email' => $request->input('email'),
             'dien_thoai' => $request->input('dien_thoai'),
-            'dia_chi' => $request->input('dia_chi'),
-            'mat_khau' => $request->input('mat_khau'),
+            'dia_chi' => $diachi,
+            'province_id' => $request->input('province_id'),
+            'district_id' => $request->input('district_id'),
+            'ward_id' => $request->input('ward_id'), 
+            'matkhau' => Hash::make($request->input('mat_khau')),
             'trang_thai' => 1
         ]);
         return redirect()->route('dangnhapkhach');
@@ -52,19 +64,21 @@ class XacThucController extends Controller
         return view('trangchu.dangnhap');
     }
     public function dangxuat()
-    {
+    { 
         auth()->guard('khachhangs')->logout();
         return redirect()->route('trangchu.index');
     }
     public function xacthucKhach(Request $request)
     {
+        
         $request->validate(['email' => 'required|email:rfc,dns', 'mat_khau' => 'required'],
                            [
                                 'email.required' => 'Vui lòng nhập địa chỉ email',
                                 'email.email' => 'Email không hợp lệ',
                                 'mat_khau.required' => 'Vui lòng nhập mật khẩu',
-                           ]);
+                           ]); 
         $khachhang = KhachHang::where('email', $request->input('email'))->first();
+         
         if(!$khachhang) return redirect()->route('dangnhapkhach')->withErrors('email', 'Email chưa đăng ký');
         
         if (Hash::check($request->input('mat_khau'), $khachhang->matkhau)) {     

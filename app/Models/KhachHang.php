@@ -21,6 +21,9 @@ class KhachHang extends Authenticatable
         'tai_khoan_ngan_hang',
         'mangxahoi',
         'mangxahoi_id',
+        'province_id',
+        'district_id',
+        'ward_id',
         'trang_thai',
     ];
     public static $timkiem = [

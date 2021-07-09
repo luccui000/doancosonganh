@@ -1,6 +1,7 @@
 <?php
 
 use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
  
@@ -8,6 +9,19 @@ Route::get('test/mail', function() {
     Mail::to('email@gmail.com')->send(new WelcomeMail());
     return new WelcomeMail();
 }); 
+Route::get('fee', function() {   
+    $response = Http::withHeaders([ 
+            'Content-Type' => 'application/json',
+            'token' => config('services.giaohangnhanh.token')
+        ])
+        ->get('https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=850'); 
+    // $data = collect($response->collect()['data']);
+    // $proviceId = 84;
+    // $isOke = $data->map(function($value, $key) use ($proviceId) {
+    //     return $value['Code'];
+    // });
+    dd($response->collect()); 
+});
 
 Route::get('dangky', [App\Http\Controllers\XacThucController::class, 'dangkyKhach'])->name('dangkykhach');
 Route::post('dangky', [App\Http\Controllers\XacThucController::class, 'formDangky'])->name('formdangky');
