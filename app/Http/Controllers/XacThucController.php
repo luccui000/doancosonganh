@@ -26,12 +26,15 @@ class XacThucController extends Controller
     }
     public function formDangky(Request $request)
     {
-        $ward = Address::getWard($request); 
-        $district = Address::getDistrict($request); 
-        $province = Address::getProvince($request); 
+        $provinceId = $request->input('province_id');
+        $districtId = $request->input('district_id');
+        $wardId = $request->input('ward_id');
+        $ward = Address::getWard($districtId, $wardId); 
+        $district = Address::getDistrict($provinceId, $districtId); 
+        $province = Address::getProvince($provinceId); 
           
         $diachi = $ward.', '.$district.', '.$province;
-          
+           
 
         $request->validate(array_merge(KhachHang::VALIDATION_RULES, [
             'email' => 'required|email:rfc,dns',

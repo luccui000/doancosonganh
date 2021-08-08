@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers; 
 
+Route::get('/', function() {
+    return redirect()->to('/admin/dangnhap');
+});
 Route::get('/dangnhap', [Controllers\XacThucController::class, 'dangnhap'])->name('admin.dangnhap');
 Route::post('/dangnhap', [Controllers\XacThucController::class, 'xacthuc'])->name('admin.xacthuc');
 
@@ -36,6 +39,7 @@ Route::group(['as' => 'admin.'], function() {
     });
     Route::group(['as' => 'khachhang.', 'prefix' => 'khachhang'], function() {
         Route::get('/', [Controllers\KhachHangController::class, 'index'])->name('index');
+        Route::get('/{id}', [Controllers\KhachHangController::class, 'show'])->name('show');
         Route::get('/getKhachHang', [Controllers\KhachHangController::class, 'getKhachHang'])->name('getKhachHang');
     });
     Route::group(['as' => 'hinhanh.', 'prefix' => 'hinhanh'], function() {

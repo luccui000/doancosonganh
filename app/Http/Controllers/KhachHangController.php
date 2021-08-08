@@ -16,6 +16,10 @@ class KhachHangController extends Controller
             'khachhangs' => KhachHang::latest()->paginate(5)
         ]);
     }
+    public function show(KhachHang $khachhang)
+    {
+        dd($khachhang);
+    }
     public function getKhachHang()
     {
         if (request()->ajax()) {

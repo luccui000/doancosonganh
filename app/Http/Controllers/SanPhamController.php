@@ -130,6 +130,24 @@ class SanPhamController extends Controller
         // SanPham
         return redirect()->route('admin.sanpham.index');
     }
+    public function getProductByCategory($category)
+    {
+        $product = SanPham::where('loaisanpham_id', $category)
+                            ->select('id', 'ma_sanpham', 'ten_sanpham', 'duong_dan_lien_ket', 'hangsanxuat_id')
+                            ->get();
+        return response()->json([
+            'sanpham' => $product
+        ]);
+    }
+    public function getProductBySuplier($suplierId)
+    {
+        $product = SanPham::where('hangsanxuat_id', $suplierId)
+                            ->select('id', 'ten_sanpham', 'duong_dan_lien_ket')
+                            ->get();
+        return response()->json([
+            'sanpham' => $product
+        ]);
+    }
     public function destroy($id)
     {    
         SanPham::destroy($id);

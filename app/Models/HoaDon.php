@@ -10,6 +10,8 @@ class HoaDon extends Model
     use HasFactory;
     protected $table = 'HOADON';
 
+    const GIAOHANGNHANH = 'Giao hàng nhanh';
+
     public $fillable = [
         'tong_tien',
         'gia_giam',
@@ -17,7 +19,11 @@ class HoaDon extends Model
         'hinh_thuc_thanh_toan',
         'ghi_chu',
         'ma_giao_dich',
+        'don_vi_van_chuyen',
+        'phi_van_chuyen',
         'trang_thai',
+        'district_id',
+        'ward_id',
 
         'khachhang_id',
     ];

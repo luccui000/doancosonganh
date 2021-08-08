@@ -147,20 +147,24 @@
                            @php echo Cart::total(); @endphp₫ 
                         </div>
                       </div> 
-                        <div class="flex justify-between pt-4 border-b">
-                          <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
-                            Giảm giá
-                          </div>
-                          <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                            0.0₫ 
-                          </div>
-                        </div> 
+                      <div class="flex justify-between pt-4 border-b">
+                        <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
+                          Phí vận chuyển
+                        </div>
+                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
+                          {{ money_format('%.0n', $phivanchuyen) }}
+                        </div>
+                      </div> 
                         <div class="flex justify-between pt-4 border-b">
                           <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
                             Tổng thanh toán
                           </div>
                           <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                            @php echo Cart::total(); @endphp₫ 
+                            @php 
+                              $total = Cart::total(); 
+                              $total = +str_replace('.', '', $total);
+                              echo money_format('%.0n', $total + $phivanchuyen);
+                            @endphp
                           </div>
                         </div>  
                         <div class="mt-2 space-y-2"> 

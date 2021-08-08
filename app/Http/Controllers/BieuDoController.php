@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HoaDon;
+use App\Models\SanPham;
 use App\Models\GiaoDich;
 use App\Models\KhachHang;
 use App\Models\LoaiSanPham;
-use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Khill\Lavacharts\Lavacharts;
 
@@ -85,7 +86,11 @@ class BieuDoController extends Controller
         return view('admin.bieudo.index', [
             'lava' => $lava, 
             'giaodichs' => GiaoDich::latest()->paginate(10),
-            'khachhangs' => KhachHang::latest()->paginate(10)
+            'khachhangs' => KhachHang::latest()->take(5)->get(),
+            'tongsokhachhang' => KhachHang::count(),
+            'tongdoanhthu' => money_format('%.0n', HoaDon::where('trang_thai', 2)->sum('tong_thanh_toan')),
+            'sodonhangmoi' => HoaDon::where('trang_thai', 1)->count(),
+            'tongsosanpham' => SanPham::count(),
         ]);
     }
 }

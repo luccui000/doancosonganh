@@ -24,7 +24,7 @@
     <div class="col-span-full xl:col-span-8 bg-white shadow rounded-sm border border-gray-200">
         <header class="px-2 py-2 border-b border-gray-100 flex justify-between">
             <div class="">
-                <h2 class="font-semibold text-gray-800 pt-2">Chỉnh sửa mặt hàng</h2>
+                <h2 class="font-semibold text-gray-800 pt-2">Thay đổi thông tin mặt hàng</h2>
             </div>  
         </header>
         <div class="p-3"> 
@@ -122,7 +122,7 @@
                                 <header x-data="{}" class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
                                     <input type="file" id="file-input" x-ref="hinhanh" onchange="loadPreview(this)" name="hinhanh[]"  multiple />
                                     <button type="button" @click="$refs.hinhanh.click()" class="mt-2 rounded-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 focus:shadow-outline focus:outline-none">
-                                       Tải file lên
+                                       Tải hình ảnh lên
                                     </button>
                                     <p class=" text-gray-600 flex flex-wrap justify-center helptext">
                                          

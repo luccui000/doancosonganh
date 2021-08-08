@@ -42,4 +42,5 @@ class MyApp {
         'KhachHang' => 'Khách hàng',
         'Slider' => 'Slider',
     ]; 
+    const ICON = ['product', 'product', 'bill', 'suplier', 'report', 'transaction', 'customer', 'slider'];
 }

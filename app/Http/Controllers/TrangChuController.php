@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Gateway\GiaoHang\GiaoHangNhanhGateway;
 use App\Models\GiaoDich;
 use App\Models\HoaDon;
 use App\Models\KhachHang;
@@ -12,8 +13,13 @@ use Closure;
 use Laravel\Ui\Presets\React;
 
 class TrangChuController extends Controller
-{
-    private $khachhangId;
+{ 
+    protected $giaohangnhanh;
+
+    public function __construct(GiaoHangNhanhGateway $giaohangnhanh)
+    {
+        $this->giaohangnhanh = $giaohangnhanh;
+    }
     public function index()
     {
         $sanphams = SanPham::all();
@@ -46,8 +52,11 @@ class TrangChuController extends Controller
     }
     public function xemgiohang()
     { 
+        $khachhang = auth()->guard('khachhangs')->user(); 
+        $phivanchuyen = $this->giaohangnhanh->phiVanChuyen(2179, 621003);  
         return view('trangchu.giohang', [
-            'giohangs' => session()->get('giohang')
+            'giohangs' => session()->get('giohang'),
+            'phivanchuyen' => $phivanchuyen['total'] ?? 0
         ]);
     }
     public function capnhatGiohang(Request $request, $id)
@@ -58,7 +67,7 @@ class TrangChuController extends Controller
     public function thanhtoan(Request $request)
     {    
         $khachhang = auth()->guard('khachhangs')->user(); 
-        
+         
         if($khachhang) {
             $validateRules = [
                 'ho_ten' => 'required',
@@ -95,15 +104,19 @@ class TrangChuController extends Controller
             ]);
         }  
         session()->put('khachhang_id', $khachhang->id);
+        
+        $phivanchuyen = $this->giaohangnhanh->phiVanChuyen(2179, 621003); 
         if($request->input('thanhtoan') == 1) { 
             $hoadon = HoaDon::create([
                 'tong_tien' => str_replace('.', '', Cart::total()),
                 'gia_giam' => 0,
-                'tong_thanh_toan' => str_replace('.', '', Cart::total()),
+                'tong_thanh_toan' => +str_replace('.', '', Cart::total()) + $phivanchuyen['total'],
                 'hinh_thuc_thanh_toan' => 1,
                 'ghi_chu' => $request->input('ghi_chu'),
                 'ma_giao_dich' => '',
                 'trang_thai' => 0,
+                'district_id' => $khachhang->district_id,
+                'ward_id' => $khachhang->ward_id,
     
                 'khachhang_id' => $khachhang->id,
             ]);
