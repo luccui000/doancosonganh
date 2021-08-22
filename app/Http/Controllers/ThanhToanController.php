@@ -2,66 +2,81 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Cart; 
 
-use Cart;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ThanhToanController extends Controller
-{
-    
-    public function vnpay(Request $request)
+{  
+    public function thanhtoan(Request $request)
     {
-        session(['cost_id' => $request->id]);
-        session(['url_prev' => url()->previous()]);
-        $vnp_TmnCode = "SQLTAUTY";  
-        $vnp_HashSecret = "KNZOFHEAIOTJSYODEPCHJXPGWIBASBLI";  
-        $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost:8000/returnVnpay";
-        $vnp_TxnRef = date("YmdHis"); 
-        $vnp_OrderInfo = "Thanh toán hóa đơn mua hàng";
-        $vnp_OrderType = 'billpayment';
-        $vnp_Amount =  str_replace('.', '', Cart::total()) * 100;
-        $vnp_Locale = 'vn';
-        $vnp_IpAddr = request()->ip();
- 
-        $inputData = array(
-            "vnp_Version" => "2.0.0",
-            "vnp_TmnCode" => $vnp_TmnCode,
-            "vnp_Amount" => $vnp_Amount,
-            "vnp_Command" => "pay",
-            "vnp_CreateDate" => date('YmdHis'),
-            "vnp_CurrCode" => "VND",
-            "vnp_IpAddr" => $vnp_IpAddr,
-            "vnp_Locale" => $vnp_Locale,
-            "vnp_OrderInfo" => $vnp_OrderInfo,
-            "vnp_OrderType" => $vnp_OrderType,
-            "vnp_ReturnUrl" => $vnp_Returnurl,
-            "vnp_TxnRef" => $vnp_TxnRef,
-        );
+        $hinhThucThanhToan = $request->input('hinh_thuc_thanh_toan'); 
+        abort_if(!in_array($hinhThucThanhToan, [0, 1]), Response::HTTP_NOT_ACCEPTABLE);
 
-        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-            $inputData['vnp_BankCode'] = $vnp_BankCode;
-        }
-        ksort($inputData);
-        $query = "";
-        $i = 0;
-        $hashdata = "";
-        foreach ($inputData as $key => $value) {
-            if ($i == 1) {
-                $hashdata .= '&' . $key . "=" . $value;
-            } else {
-                $hashdata .= $key . "=" . $value;
-                $i = 1;
+        session()->put('hinh_thuc_thanh_toan', $hinhThucThanhToan);
+    
+        $khachhang = auth()->guard('khachhangs')->user(); 
+        
+        if(!$khachhang) {
+            $khachhang = $this->khachvanglai($request);
+        } 
+
+        session()->put('khachhang_id', $khachhang->id);
+        
+        // $phivanchuyen = $this->giaohangnhanh->phiVanChuyen(2179, 621003);  
+
+        \DB::transaction(function () use (
+            $request, 
+            $hinhThucThanhToan,
+            $khachhang ) {
+            try {
+                $phivanchuyen = 123000; 
+                if($hinhThucThanhToan === "0") {
+                    $hoadon = HoaDon::create([
+                        'tong_tien' => str_replace('.', '', Cart::total()),
+                        'gia_giam' => 0,
+                        'tong_thanh_toan' => +str_replace('.', '', Cart::total()) + $phivanchuyen['total'],
+                        'hinh_thuc_thanh_toan' => 1,
+                        'ghi_chu' => $request->input('ghi_chu'),
+                        'ma_giao_dich' => '',
+                        'trang_thai' => 0,
+                        'district_id' => $khachhang->district_id,
+                        'ward_id' => $khachhang->ward_id,
+            
+                        'khachhang_id' => $khachhang->id,
+                    ]);
+                    foreach(Cart::content() as $sanpham) { 
+                        $hoadon->sanpham()->attach($sanpham->id, [
+                            'so_luong' => $sanpham->qty,
+                            'don_gia' => $sanpham->price,
+                            'thanh_tien' => $sanpham->total,
+                        ]);
+                        $sp = SanPham::where('id', $sanpham->id)->first();
+                        $soLuongTonKho = $sp->so_luong_ton_kho;
+                        $sp->update(['so_luong_ton_kho' => $soLuongTonKho - $sanpham->qty]);
+                    } 
+                    Cart::destroy();
+                    return redirect()->route('trangchu.index');
+                }
+            } catch(\Exception $err) {
+                \DB::rollback();
             }
-            $query .= urlencode($key) . "=" . urlencode($value) . '&';
-        }
-
-        $vnp_Url = $vnp_Url . "?" . $query;
-        if (isset($vnp_HashSecret)) {
-           // $vnpSecureHash = md5($vnp_HashSecret . $hashdata);
-            $vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
-            $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
-        }
-        return redirect($vnp_Url);
+        }); 
     } 
+    public function khachvanglai(Request $request)
+    {
+        $request->validate(
+            array_merge(KhachHang::VALIDATION_RULES,['dia_chi' => 'required']), 
+            array_merge(KhachHang::VALIDATION_MESSAGES, ['dia_chi.required' => 'Vui lòng nhập địa chỉ' ])
+        );
+        $khachhang = KhachHang::create([
+            'ho_ten' => $request->input('ho_ten'),
+            'email' => $request->input('email'),
+            'dien_thoai' => $request->input('dien_thoai'),
+            'dia_chi' => $request->input('dia_chi'),
+            'trang_thai' => 1
+        ]);    
+        return $khachhang;
+    }
 }

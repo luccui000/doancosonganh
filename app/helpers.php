@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\KhachHang;
 use App\MyApp;
 
 if ( ! function_exists( 'money_format' ) ) {
-
     function money_format($format, $number)
     { 
         $regex  = '/%((?:[\^!\-]|\+|\(|\=.)*)([0-9]+)?'.
@@ -125,5 +125,15 @@ if(!function_exists('lay_key_thong_tin_bao_hanh'))
         }
         dd($convertArray);
         return $convertArray;
+    }
+}
+if(!function_exists('thong_tin_khach_hang')) {
+    function thong_tin_khach_hang($name) {
+        $khachhang = new KhachHang(); 
+
+        if(!in_array($name, $khachhang->fillable))
+            return;
+
+        return auth()->guard('khachhangs')->user()->$name;
     }
 }

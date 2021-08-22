@@ -13,7 +13,7 @@ class KhachHangController extends Controller
     public function index()
     { 
         return view('admin.khachhang.index', [
-            'khachhangs' => KhachHang::latest()->paginate(5)
+            'khachhangs' => KhachHang::latest()->paginate(10)
         ]);
     }
     public function show(KhachHang $khachhang)

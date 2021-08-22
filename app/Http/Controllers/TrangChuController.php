@@ -8,9 +8,7 @@ use App\Models\HoaDon;
 use App\Models\KhachHang;
 use App\Models\SanPham;    
 use Illuminate\Http\Request;
-use Cart;
-use Closure;
-use Laravel\Ui\Presets\React;
+use Cart; 
 
 class TrangChuController extends Controller
 { 
@@ -65,7 +63,10 @@ class TrangChuController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!')->withInput();
     } 
     public function thanhtoan(Request $request)
-    {    
+    {      
+        session()->put('hinh_thuc_thanh_toan', $request->input('thanhtoan'));
+        return redirect()->route('xacnhan');
+        // session()->put('payment_type', );
         $khachhang = auth()->guard('khachhangs')->user(); 
          
         if($khachhang) {
@@ -135,7 +136,7 @@ class TrangChuController extends Controller
         } else {
             return redirect()->route('vnpay');
         }
-    } 
+    }  
     public function returnVnpay(Request $request)
     {   
         $khachhang_id = session()->get('khachhang_id');

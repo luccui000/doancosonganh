@@ -3,393 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">  
-    <style> 
-        body {
-            font-family: 'Roboto', sans-serif;
-			position: relative;
-			overflow-x: hidden; 
-        }   
-		body,
-		html { height: 100%;}
-		.nav .open > a, 
-		.nav .open > a:hover, 
-		.nav .open > a:focus {background-color: transparent;}
-
-		/*-------------------------------*/
-		/*           Wrappers            */
-		/*-------------------------------*/
-
-		#wrapper {
-			padding-left: 0;
-			-webkit-transition: all 0.5s ease;
-			-moz-transition: all 0.5s ease;
-			-o-transition: all 0.5s ease;
-			transition: all 0.5s ease;
-			display: flex;
-		}
-
-		#wrapper.toggled {
-			padding-left: 240px;
-		}
-
-		#sidebar-wrapper {
-			z-index: 1000;
-			left: 240px;
-			width: 0;
-			height: 100%;
-			margin-left: -240px;
-			overflow-y: auto;
-			overflow-x: hidden;
-			background: #3d3d3d;
-			-webkit-transition: all 0.5s ease;
-			-moz-transition: all 0.5s ease;
-			-o-transition: all 0.5s ease;
-			transition: all 0.5s ease;
-		}
-
-		#sidebar-wrapper::-webkit-scrollbar {
-		display: none;
-		}
-
-		#wrapper.toggled #sidebar-wrapper {
-			width: 240px;
-		}
-
-		#page-content-wrapper {
-			width: 100%;
-			padding-top: 0px;
-			flex: 1;
-		}
-
-		#wrapper.toggled #page-content-wrapper {
-			position: absolute;
-			margin-right: -240px;
-		}
-
-		/*-------------------------------*/
-		/*     Sidebar nav styles        */
-		/*-------------------------------*/
-		.navbar {
-		padding: 0;
-		}
-
-		.sidebar-nav {
-			position: absolute;
-			top: 0;
-			width: 240px;
-			margin: 0;
-			padding: 0;
-			list-style: none;
-		}
-
-		.sidebar-nav li {
-			position: relative; 
-			line-height: 20px;
-			display: inline-block;
-			width: 100%;
-		}
-
-		.sidebar-nav li:before {
-			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: -1;
-			height: 100%;
-			width: 3px;
-			background-color: #1c1c1c;
-			-webkit-transition: width .2s ease-in;
-			-moz-transition:  width .2s ease-in;
-			-ms-transition:  width .2s ease-in;
-					transition: width .2s ease-in;
-
-		}
-		.sidebar-nav li:hover{
-			background: #303030 !important; 
-			margin-left: 10px;
-			margin-right: 10px;
-		}
-		.sidebar-nav li:hover:before,
-		.sidebar-nav li.open:hover:before {
-			width: 100%;
-			-webkit-transition: width .2s ease-in;
-			-moz-transition:  width .2s ease-in;
-			-ms-transition:  width .2s ease-in;
-					transition: width .2s ease-in;
-
-		}
-
-		.sidebar-nav li a {
-			display: block;
-			color: #ddd;
-			text-decoration: none;
-			padding: 10px 15px 10px 30px;    
-		}
-
-		.sidebar-nav li a:hover,
-		.sidebar-nav li a:active,
-		.sidebar-nav li a:focus,
-		.sidebar-nav li.open a:hover,
-		.sidebar-nav li.open a:active,
-		.sidebar-nav li.open a:focus{
-			color: #fff;
-			text-decoration: none;
-			background-color: transparent;
-		}
-		.sidebar-header {
-			text-align: center;
-			font-size: 20px;
-			position: relative;
-			width: 100%;
-			display: inline-block;
-		}
-		.sidebar-brand { 
-			height: 50px;
-			position: relative;
-			background:#303030; 
-			padding-top: 10px;
-		}
-		.sidebar-brand a {
-			color: #ddd;
-		}
-		.sidebar-brand a:hover {
-			color: #fff;
-			text-decoration: none;
-		} 
-		.sidebar-nav .dropdown-menu {
-			position: relative;
-			width: 100%;
-			padding: 0;
-			margin: 0;
-			border-radius: 0;
-			border: none;
-			background-color: #222;
-			box-shadow: none;
-		}
-		.dropdown-menu.show {
-			top: 0;
-		} 
-		.hamburger {
-			position: fixed;
-			top: 10px;  
-			z-index: 999;
-			display: block;
-			width: 32px;
-			height: 32px;
-			margin-left: 15px;
-			background: transparent;
-			border: none;
-		}
-		.hamburger:hover,
-		.hamburger:focus,
-		.hamburger:active {
-			outline: none;
-		}
-		.hamburger.is-closed:before {
-			content: '';
-			display: block;
-			width: 100px;
-			font-size: 14px;
-			color: #fff;
-			line-height: 32px;
-			text-align: center;
-			opacity: 0;
-			-webkit-transform: translate3d(0,0,0);
-			-webkit-transition: all .35s ease-in-out;
-		}
-		.hamburger.is-closed:hover:before {
-			opacity: 1;
-			display: block;
-			-webkit-transform: translate3d(-100px,0,0);
-			-webkit-transition: all .35s ease-in-out;
-		}
-
-		.hamburger.is-closed .hamb-top,
-		.hamburger.is-closed .hamb-middle,
-		.hamburger.is-closed .hamb-bottom,
-		.hamburger.is-open .hamb-top,
-		.hamburger.is-open .hamb-middle,
-		.hamburger.is-open .hamb-bottom {
-			position: absolute;
-			left: 0;
-			height: 4px;
-			width: 100%;
-		}
-		.hamburger.is-closed .hamb-top,
-		.hamburger.is-closed .hamb-middle,
-		.hamburger.is-closed .hamb-bottom {
-		background-color: #1a1a1a;
-		}
-		.hamburger.is-closed .hamb-top { 
-		top: 5px; 
-		-webkit-transition: all .35s ease-in-out;
-		}
-		.hamburger.is-closed .hamb-middle {
-		top: 50%;
-		margin-top: -2px;
-		}
-		.hamburger.is-closed .hamb-bottom {
-		bottom: 5px;  
-		-webkit-transition: all .35s ease-in-out;
-		}
-
-		.hamburger.is-closed:hover .hamb-top {
-		top: 0;
-		-webkit-transition: all .35s ease-in-out;
-		}
-		.hamburger.is-closed:hover .hamb-bottom {
-			bottom: 0;
-			-webkit-transition: all .35s ease-in-out;
-		}
-		.hamburger.is-open .hamb-top,
-		.hamburger.is-open .hamb-middle,
-		.hamburger.is-open .hamb-bottom {
-			background-color: #1a1a1a;
-		}
-		.hamburger.is-open .hamb-top,
-		.hamburger.is-open .hamb-bottom {
-			top: 50%;
-			margin-top: -2px;  
-			}
-		.hamburger.is-open .hamb-top { 
-			-webkit-transform: rotate(45deg);
-			-webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
-		}
-		.hamburger.is-open .hamb-middle { display: none; }
-		.hamburger.is-open .hamb-bottom {
-			-webkit-transform: rotate(-45deg);
-			-webkit-transition: -webkit-transform .2s cubic-bezier(.73,1,.28,.08);
-		}
-		.hamburger.is-open:before {
-			content: '';
-			display: block;
-			width: 100px;
-			font-size: 14px;
-			color: #fff;
-			line-height: 32px;
-			text-align: center;
-			opacity: 0;
-			-webkit-transform: translate3d(0,0,0);
-			-webkit-transition: all .35s ease-in-out;
-		}
-		.hamburger.is-open:hover:before {
-			opacity: 1;
-			display: block;
-			-webkit-transform: translate3d(-100px,0,0);
-			-webkit-transition: all .35s ease-in-out;
-		} 
-
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">   
     <script src="{{ asset("js/alpine.min.js") }}" ></script>   
     <title>Trang quản trị</title> 
     @stack('styles')
     @livewireStyles 
-</head>
-<body>  
-	<div id="wrapper" class=" toggled">
-		<div class="overlay"></div> 
-		<nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
-			<ul class="nav sidebar-nav">
-				<div class="sidebar-header">
-					<div class="sidebar-brand">
-						<a href="#">TVU</a>
-					</div>
-				</div>
-				<li><a href="#about">Bài đăng</a></li>
-				<li><a href="#about">Liên hệ</a></li>
-				<li class="dropdown">
-					<a href="#works" class="dropdown-toggle"  data-toggle="dropdown">TMDT<span class="caret"></span></a>
-					<ul class="dropdown-menu animated fadeInLeft" role="menu"> 
-						<li><a href="{{ route('admin.baocao.index') }}">Báo cáo</a></li>
-						<li><a href="{{ route('admin.sanpham.index') }}">Sản phẩm</a></li> 
-						<li><a href="{{ route('admin.hangsanxuat.index') }}">Hãng sản xuất</a></li>
-						<li><a href="{{ route('admin.hoadon.index') }}">Hóa đơn</a></li>
-						<li><a href="{{ route('admin.khachhang.index') }}">Khách hàng</a></li>
-						<li><a href="{{ route('admin.giaodich.index') }}">Giao dịch</a></li>
-					</ul>
-				</li>		  
-				<li><a href="#followme">Thanh toán</a></li>
-				<li><a href="#followme">Cài đặt</a></li>
-			</ul>
-		 </nav>
-		<div id="page-content-wrapper"> 
-			<div class="container-fluid">
-				<header class="z-10 py-2 bg-white">
-					<div class="container-fluid flex items-center justify-between h-full px-6 mx-auto text-purple-600">
-						<button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
-							<span class="hamb-top"></span>
-							<span class="hamb-middle"></span>
-							<span class="hamb-bottom"></span>
-						</button>
-						<div class="flex justify-center flex-1 lg:mr-32">
-							<div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
-							  <div class="absolute inset-y-0 flex items-center pl-2 right-2">
-								<svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-								  <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-								</svg>
-							  </div>
-							  @livewire('admin-search')
-							</div>
-						</div>  
-						<div class="flex">
-							<a class="hover:no-underline cursor-pointer inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 text-gray-700" > 
-								<svg class="h-6 w-6" fill="none"  viewBox="0 0 24 24" stroke="currentColor">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-								  </svg>
-								<span>Tài khoản</span>
+</head> 
+<body class="antialiased bg-gray-200"> 
+	<div x-data="{ sidemenu: false, segmentUrl: '{{ request()->segment(2) }}' }" class="h-screen flex overflow-hidden" x-cloak @keydown.window.escape="sidemenu = false"> 
+        <div class="md:hidden">
+			<div @click="sidemenu = false" class="fixed inset-0 z-30 bg-gray-600 opacity-0 pointer-events-none transition-opacity ease-linear duration-300" :class="{'opacity-75 pointer-events-auto': sidemenu, 'opacity-0 pointer-events-none': !sidemenu}"></div> 
+			<div class="fixed inset-y-0 left-0 flex flex-col z-40 max-w-xs w-full bg-white transform ease-in-out duration-300 -translate-x-full" :class="{'translate-x-0': sidemenu, '-translate-x-full': !sidemenu}">
+ 
+				<div class="flex items-center px-6 py-3 h-16">
+					<div class="text-2xl font-bold tracking-tight text-gray-800">Dashing Admin.</div>
+				</div> 
+				<div class="px-4 py-2 flex-1 h-0 overflow-y-auto">
+					<ul>
+						<li>
+							<a href="{{ route('admin.baocao.index') }}" 
+								class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200"> 
+								<i class="fa fa-house-damage mr-4"></i>
+								Trang chủ
 							</a>
-						</div> 
-					  </div>
-				</header>
-				<div class="mt-2">
-					@yield('content')
-				</div>
+						</li>
+
+						<li>
+							<a href="{{ route('admin.sanpham.index') }}#"
+								class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200">
+								<i class="fa fa-cube mr-4"></i>
+								Sản phẩm
+							</a>
+						</li>
+
+						<li>
+							<a href="{{ route('admin.hoadon.index') }}"
+								class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200">
+								<i class="fa fa-file-invoice-dollar mr-4"></i> 
+								<span class="ml-1">Hóa đơn</span>
+							</a>
+						</li>
+
+						<li>
+							<a href="{{ route('admin.khachhang.index') }}"
+								class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-blue-700 hover:text-blue-600 hover:bg-gray-200 bg-gray-200">
+								<i class="fa fa-users-cog mr-4"></i> 
+								Khách hàng
+							</a>
+						</li>
+
+						<li>
+							<a href="{{ route('admin.hangsanxuat.index') }}"
+								class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200">
+								<i class="fa fa-city mr-4"></i> 
+								Hãng sản xuất
+							</a>
+						</li>
+
+						<li>
+							<a href="{{ route('admin.giaodich.index') }}"
+								class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200">
+								<i class="fa fa-cogs mr-4"></i> 
+								Giao dịch
+							</a>
+						</li>
+					</ul>
+				</div> 
+			</div> 
+		</div> 
+		<div class="bg-white w-64 min-h-screen overflow-y-auto hidden md:block shadow relative z-30"> 
+			<div class="flex items-center px-6 py-3 h-16">
+				<div class="text-2xl font-bold tracking-tight text-gray-800">Shop Admin</div>
+			</div> 
+			<div class="px-4 py-2">  
+				<ul>
+					<li>
+						<a href="{{ route('admin.baocao.index') }}"
+							class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200">
+							<i class="fa fa-house-damage mr-4"></i>
+							Trang chủ
+						</a>
+					</li>
+
+					<li>
+						<a href="{{ route('admin.sanpham.index') }}"
+							:class="segmentUrl === 'sanpham' ? 'text-blue-600 bg-gray-200' : ''"
+							class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200">
+							<i class="fa fa-cube mr-4"></i>
+							Sản phẩm
+						</a>
+					</li>
+
+					<li>
+						<a href="{{ route('admin.hoadon.index') }}"
+							:class="segmentUrl === 'hoadon' ? 'text-blue-600 bg-gray-200' : ''"
+							class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200">
+							<i class="fa fa-file-invoice-dollar mr-4"></i> 
+							<span class="ml-1">Hóa đơn</span>
+						</a>
+					</li>
+
+					<li>
+						<a href="{{ route('admin.khachhang.index') }}"  
+							:class="segmentUrl === 'khachhang' ? 'text-blue-600 bg-gray-200' : ''"
+							class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium  hover:text-blue-600 hover:bg-gray-200 ">
+							<i class="fa fa-users-cog mr-4"></i> 
+							Khách hàng
+						</a>
+					</li>
+
+					<li>
+						<a href="{{ route('admin.hangsanxuat.index') }}"
+							:class="segmentUrl === 'hangsanxuat' ? 'text-blue-600 bg-gray-200' : ''"
+							class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200">
+							<i class="fa fa-city mr-4"></i> 
+							Hãng sản xuất
+						</a>
+					</li>
+
+					<li>
+						<a href="{{ route('admin.giaodich.index') }}" 
+							class="mb-1 px-2 py-2 rounded-lg flex items-center font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-200">
+							<i class="fa fa-cogs mr-4"></i> 
+							Giao dịch
+						</a>
+					</li>
+				</ul> 
 			</div>
 		</div> 
-	</div> 
-	<script src="{{ asset('js/moment.min.js') }}"></script>  
-	<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
-	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-	<script src="{{ asset('js/popper.min.js') }}"></script>
-	<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-	@livewireScripts
-	<script> 
-	$(document).ready(function () {
-		var trigger = $('.hamburger'),
-			overlay = $('.overlay'),
-			isClosed = false;
+		<div class="flex-1 flex-col relative z-0 overflow-y-auto">
+			<div class="px-4 md:px-8 py-2 h-16 flex justify-between items-center shadow-sm bg-white">
+				<div class="flex items-center w-2/3">
+					<input class="bg-gray-200 focus:outline-none focus:shadow-outline focus:bg-white border border-transparent focus:border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal hidden md:block placeholder-gray-700 mr-10" type="text" placeholder="Search...">
 
-			trigger.click(function () {
-			hamburger_cross();      
-			});
+					<div class="p-2 rounded-full hover:bg-gray-200 cursor-pointer md:hidden" @click="sidemenu = !sidemenu">
+						<svg xmlns="http://www.w3.org/2000/svg" class="text-gray-600"
+							width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+							fill="none" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+							<line x1="4" y1="6" x2="20" y2="6" />
+							<line x1="4" y1="12" x2="20" y2="12" />
+							<line x1="4" y1="18" x2="20" y2="18" />
+						</svg>
+					</div>
+					<div class="text-xl font-bold tracking-tight text-gray-800 md:hidden ml-2">Dashing Admin.</div>
+				</div>
+				<div class="flex items-center">
+					 
+					<a href="#" class="text-gray-500 p-2 rounded-full hover:text-blue-600 hover:bg-gray-200 cursor-pointer mr-4">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+							<rect x="0" y="0" width="24" height="24" stroke="none"></rect>
+							<path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
+							<path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+						</svg>						  
+					</a>
+					 
+					<div class="relative" x-data="{ open: false }">
+						<div @click="open = !open"
+							class="cursor-pointer font-bold w-10 h-10 bg-blue-200 text-blue-600 flex items-center justify-center rounded-full">
+							DA
+						</div>
 
-			function hamburger_cross() {
-
-			if (isClosed == true) {          
-				overlay.hide();
-				trigger.removeClass('is-open');
-				trigger.addClass('is-closed');
-				isClosed = false;
-			} else {   
-				overlay.show();
-				trigger.removeClass('is-closed');
-				trigger.addClass('is-open');
-				isClosed = true;
-			}
-		}
-		
-		$('[data-toggle="offcanvas"]').click(function () {
-				$('#wrapper').toggleClass('toggled');
-		});  
-		});
-	</script>
-    
-    @stack('scripts')
+						<div x-show.transition="open" @click.away="open = false"
+							class="absolute top-0 mt-12 right-0 w-48 bg-white py-2 shadow-md border border-gray-100 rounded-lg z-40">
+							<a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600">Edit
+								Profile</a>
+							<a href="#"
+								 class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600">Account
+								Settings</a>
+							<a href="#" class="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-blue-600">Sign
+								Out</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		 
+			<div class="p-2"> 
+				@yield('content')
+			</div>
+		</div>
+	</div>
 </body>
 </html>
